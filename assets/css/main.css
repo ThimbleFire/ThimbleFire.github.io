@@ -1,55 +1,53 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Style the header */
-  header {
-    background-color: #666;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-    color: white;
-  }
-  
-  /* Container for flexboxes */
-  section {
-    display: -webkit-flex;
-    display: flex;
-  }
-  
-  /* Style the navigation menu */
-  nav {
-    background: #ccc;
-    padding: 30px;
-  }
-  
-  /* Style the list inside the menu */
-  nav ul {
-    list-style-type: none;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
     padding: 0;
-  }
-  
-  /* Style the content */
-  article {
-    -webkit-flex: 3;
-    -ms-flex: 3;
-    flex: 3;
-    background-color: #f1f1f1;
-    padding: 10px;
-  }
-  
-  /* Style the footer */
-  footer {
-    background-color: #777;
-    padding: 10px;
-    text-align: center;
-    color: white;
-  }
-  
-  /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
-  @media (max-width: 600px) {
-    section {
-      -webkit-flex-direction: column;
-      flex-direction: column;
-    }
-  }
+    font-family: 'poppins',sans-serif;
+}
+
+section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+
+  background: url('background.jpg')no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.banner {
+    position: absolute;
+    width: 80%;
+    height: 32px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    margin: 15px 0;
+    /*border-radius: 20px;*/
+    /*backdrop-filter: blur(15px);*/
+    display: flex;
+    float:left;
+    justify-content: right;
+    align-items: center;
+    transform: translateX(10%);
+}
+
+.banner label{
+  color: white;
+  position: absolute;
+  transform: translateX(-20%);
+}
+
+.test {
+  position: relative;
+  width: 400px;
+  height: 450px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
