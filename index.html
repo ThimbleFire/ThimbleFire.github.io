@@ -18,167 +18,167 @@
         </header>
 
         <section>
-		<p>Download the latest version of Unity. While installing Unity, make sure you check the box to install Visual Studio Community (VS).
-		</br>What is visual studio?
-		</br>Visual Studio is an integrated programming environment (IDE). It's special because it has intellisense, which predicts methods and functions as you type.</p>
-		</br>Download GitHub.</p>
+		<p>
+		Download the latest version of Unity. While installing Unity, make sure you check the box to install Visual Studio Community (VS).
+		What is visual studio?
+		Visual Studio is an integrated programming environment (IDE). It's special because it has intellisense, which predicts methods and functions as you type.
+		Download GitHub.
+		what is Github?
 
-<p>what is Github?
+		Github is a source control application that allows you to share code, team up with other developers, split your code into branches which allows you to safely prototype code without making changes to the main build.
+		Furthermore it allows you to revert your project to an earlier version and look at work you published weeks, months, years ago.
+		Once you have Unity, VS and Github installed, create a github repository. 
+		This is essentially a folder that a project can be placed and developed in. When you make changes to your project you can commit those changes and publish them online.
+		Github is used by millions of developers using all languages, so it's an extremely useful tool to be familiar with.
+		You might be familiar with the term git and are wondering what the difference is between git and GitHub. The best explanation I've heard is that Github is to git what pornhub is to porn.
 
-Github is a source control application that allows you to share code, team up with other developers, split your code into branches which allows you to safely prototype code without making changes to the main build.
-Furthermore it allows you to revert your project to an earlier version and look at work you published weeks, months, years ago.
-Once you have Unity, VS and Github installed, create a github repository. 
-This is essentially a folder that a project can be placed and developed in. When you make changes to your project you can commit those changes and publish them online.
-Github is used by millions of developers using all languages, so it's an extremely useful tool to be familiar with.
-You might be familiar with the term git and are wondering what the difference is between git and GitHub. The best explanation I've heard is that Github is to git what pornhub is to porn.
+		Running unity for the first time
 
-Running unity for the first time
+		When you launch Unity for the first time and have selected 2D or 3D, you'll find at the bottom of the screen you have a project tab that houses all your assets, though right now it'll be empty. Create a folder called Resources and another called scripts. 
+		The resource folder is especially important because when you load assets during runtime, they can be loaded using the Resources.Load method, which by default uses the Resources folder. For example:
+		Sprite character = Resources.Load("sprites/character_01");
 
-When you launch Unity for the first time and have selected 2D or 3D, you'll find at the bottom of the screen you have a project tab that houses all your assets, though right now it'll be empty. Create a folder called Resources and another called scripts. 
-The resource folder is especially important because when you load assets during runtime, they can be loaded using the Resources.Load method, which by default uses the Resources folder. For example:
-Sprite character = Resources.Load("sprites/character_01");
+		Along the left-hand side of the window you have the gameobject hirarchy. At the top of this window is an add button. Use this to create a cube, or square sprite. If you select the newly made object you'll find its components along the right side of the window. 
+		All world objects have a transform component which stores information about its world position, rotation and scale. It should also have either a 2D or 3D renderer component. If you have a sprite, you can import an image into the Project window, and drag it into the sprite option of the 2D renderer. If its a 3D renderer, you'll need to create a material out of the sprite first. This can be done by right-clicking on the image you imported and navigating to create material. This will automatically create a material using the sprite.
 
-Along the left-hand side of the window you have the gameobject hirarchy. At the top of this window is an add button. Use this to create a cube, or square sprite. If you select the newly made object you'll find its components along the right side of the window. 
-All world objects have a transform component which stores information about its world position, rotation and scale. It should also have either a 2D or 3D renderer component. If you have a sprite, you can import an image into the Project window, and drag it into the sprite option of the 2D renderer. If its a 3D renderer, you'll need to create a material out of the sprite first. This can be done by right-clicking on the image you imported and navigating to create material. This will automatically create a material using the sprite.
+		In the objects component list, hit the add component button and create a C# script. VS should automatically pop up with the script open. Scripts all start with an Awake(), Start() and Update() method. These methods are inherited by MonoBehaviour.
+		Awake is good for defining the objects properties. Start is good for initializing the object or anything the object is responsible for. Update is responsible for transforming the object.
 
-In the objects component list, hit the add component button and create a C# script. VS should automatically pop up with the script open. Scripts all start with an Awake(), Start() and Update() method. These methods are inherited by MonoBehaviour.
-Awake is good for defining the objects properties. Start is good for initializing the object or anything the object is responsible for. Update is responsible for transforming the object.
+		Programmers will often use the term Good Practice, though we're not very good at agree on what good practice is. You'll find what works best for you over time, but until then it's best to 'say if it works, it works'.
 
-Programmers will often use the term Good Practice, though we're not very good at agree on what good practice is. You'll find what works best for you over time, but until then it's best to 'say if it works, it works'.
+		In the Update class type:
+		if ( Input.GetKeyDown( "D" ) )
+		{ 
+		    transform.position.translate(Vector3.Right / 10.0f);
+		    //transform.translate(Vector3.Right / 10.0f);
+		}
 
-In the Update class type:
-if ( Input.GetKeyDown( "D" ) )
-{ 
-    transform.position.translate(Vector3.Right / 10.0f);
-    //transform.translate(Vector3.Right / 10.0f);
-}
+		Save the script and run the game. Now when you hold D the cube or sprite should move.
 
-Save the script and run the game. Now when you hold D the cube or sprite should move.
+		if statements are self explanatory. The Input class is a static class with static methods, such as GetKeyDown. Static of course meaning it cannot be changed, the opposite of dynamic - though in this context it essentially means there's only one of it, and it can be called anywhere in your code (might require the class inherit MonoBehaviour though).
 
-if statements are self explanatory. The Input class is a static class with static methods, such as GetKeyDown. Static of course meaning it cannot be changed, the opposite of dynamic - though in this context it essentially means there's only one of it, and it can be called anywhere in your code (might require the class inherit MonoBehaviour though).
+		Quotation marks denote strings. Strings are a series of characters and as I'm sure you know, chracters are essentially just letters and digits.
 
-Quotation marks denote strings. Strings are a series of characters and as I'm sure you know, chracters are essentially just letters and digits.
+		transform is a member of MonoBehaviour which your class inherits. It accesses the Transform component of the game object. Transform has a bunch of methods that involve transforming (moving, resizing, rotating) the object.
 
-transform is a member of MonoBehaviour which your class inherits. It accesses the Transform component of the game object. Transform has a bunch of methods that involve transforming (moving, resizing, rotating) the object.
+		You can add 2D collider components to objects, AnimationControllers for animation. You can use TileMaps for creating platformers and Stardew Valley-esq worlds, and User Interfaces in the hirarchy to the left by clicking Add.
 
-You can add 2D collider components to objects, AnimationControllers for animation. You can use TileMaps for creating platformers and Stardew Valley-esq worlds, and User Interfaces in the hirarchy to the left by clicking Add.
+		So that's Unity. Now let's cover some programming 101.
 
-So that's Unity. Now let's cover some programming 101.
+		Functions have parameters ( ) and return types: void, int, float, string, class, etc.
 
-Functions have parameters ( ) and return types: void, int, float, string, class, etc.
+		private methods, functions and types cannot be accessed out of the class they belong to, entirely opposite to public.
+		protected can only be accessed via inheritance. For example:
 
-private methods, functions and types cannot be accessed out of the class they belong to, entirely opposite to public.
-protected can only be accessed via inheritance. For example:
+		class Person {
+		    protected int Life { get; set; } = 100;
+		}
 
-class Person {
-    protected int Life { get; set; } = 100;
-}
+		class AnneMarie : Person {
+		    Awake() { 
+			Life = 1000;
+		    }
+		}
 
-class AnneMarie : Person {
-    Awake() { 
-        Life = 1000;
-    }
-}
+		AnnieMarie inherits properties of Person, because she is a person. By default persons have 100 life, but because Anne is awesome we up that to 1,000. Life can only be changed by Anne, and those inheriting the class Person. Only AnneMarie can change her Life value, and likewise she's unable to change anyone elses'.
 
-AnnieMarie inherits properties of Person, because she is a person. By default persons have 100 life, but because Anne is awesome we up that to 1,000. Life can only be changed by Anne, and those inheriting the class Person. Only AnneMarie can change her Life value, and likewise she's unable to change anyone elses'.
+		Anne can however call static members provided they are public.
 
-Anne can however call static members provided they are public.
+		class Work {
+		    public static bool Sucks {get; set;} = false;
+		}
 
-class Work {
-    public static bool Sucks {get; set;} = false;
-}
+		class AnneMarie : Person { 
+		    Awake() {
+			Life = 1000;
+			Work.Sucks = true;
+		    }
+		}
 
-class AnneMarie : Person { 
-    Awake() {
-        Life = 1000;
-        Work.Sucks = true;
-    }
-}
+		Static classes are fantastic for storing things like inventory items, methods for playing music and sound effects, methods for performing calculations.
+		I use static classes for storing entity positions in game worlds so I can access them anywhere.
 
-Static classes are fantastic for storing things like inventory items, methods for playing music and sound effects, methods for performing calculations.
-I use static classes for storing entity positions in game worlds so I can access them anywhere.
+		Lists are extremely useful for storing lots of the same things, like enemies. Public lists are serilizable and can be seen and accessed in the Unity window via the gameobject's component list. Here's an example of how I utilize lists when handling turn order in a turn-based game. ( I get a bit carried away typing this )
 
-Lists are extremely useful for storing lots of the same things, like enemies. Public lists are serilizable and can be seen and accessed in the Unity window via the gameobject's component list. Here's an example of how I utilize lists when handling turn order in a turn-based game. ( I get a bit carried away typing this )
+		using System.Collection.Generic;
+		class Game : MonoBehaviour
+		{
+		    private List<Entity> entities = new List<Entity>();
+		    byte entityTurnCounter = 0;
 
-using System.Collection.Generic;
-class Game : MonoBehaviour
-{
-    private List<Entity> entities = new List<Entity>();
-    byte entityTurnCounter = 0;
+		    //Once an entity finishes taking its turn, it calls this static method
+		    public static void EndTurn()
+		    {
+			//We incriment the turn counter
+			entityTurnCounter++;
 
-    //Once an entity finishes taking its turn, it calls this static method
-    public static void EndTurn()
-    {
-        //We incriment the turn counter
-        entityTurnCounter++;
+			//If the counter counter exceeds the number of entities, we go back to the first entity
+			if(entityTurnCounter >= entities.Count)
+			    entityTurnCounter = 0;
 
-        //If the counter counter exceeds the number of entities, we go back to the first entity
-        if(entityTurnCounter >= entities.Count)
-            entityTurnCounter = 0;
+			//Tell the next entity to take its turn
+			entities[entityTurnCounter].TakeTurn();
+		    }
+		}
 
-        //Tell the next entity to take its turn
-        entities[entityTurnCounter].TakeTurn();
-    }
-}
+		using System.Collection.Generic;
+		class Entity : MonoBehaviour
+		{
+		    private int aggroRange {get;set;} = 7;
+		    private int chaseRange {get;set;} = 10;
+		    private int idleRange {get;set;} = 9;
+		    private int life {get;set;} = 7;
+		    private int damage {get;set;} = 2;
 
-using System.Collection.Generic;
-class Entity : MonoBehaviour
-{
-    private int aggroRange {get;set;} = 7;
-    private int chaseRange {get;set;} = 10;
-    private int idleRange {get;set;} = 9;
-    private int life {get;set;} = 7;
-    private int damage {get;set;} = 2;
+		    public void TakeTurn()
+		    {
+			 List<Node> path = PathFinder.GetPath(transform.position, playerCharacter.position);
 
-    public void TakeTurn()
-    {
-         List<Node> path = PathFinder.GetPath(transform.position, playerCharacter.position);
+			 int distance = path.Count;
 
-         int distance = path.Count;
+			if(distance <= aggroRange || distance <= chaseRange)
+			{
+			    Chase(path);
+			}
+			else { Idle(PathFinder.Idle(transform.position)); }
+		    }
+		}
 
-        if(distance <= aggroRange || distance <= chaseRange)
-        {
-            Chase(path);
-        }
-        else { Idle(PathFinder.Idle(transform.position)); }
-    }
-}
+		Alternatively you can use polymorphism to store a variety of different classes provided they all inherit the same base class, like the Person class we declared earlier.
 
-Alternatively you can use polymorphism to store a variety of different classes provided they all inherit the same base class, like the Person class we declared earlier.
+		class Tony : Person
+		{
+			// hello world
+		}
 
-class Tony : Person
-{
-        // hello world
-}
+		using System.Collection.Generic;
+		class Game : MonoBehaviour
+		{
+		       private Awake()
+		       {
+			    List<Person> people = new List<Person>();
+			    people.Add(new Tony());
+			    people.Add(new AnneMarie());
+		       }
+		}
 
-using System.Collection.Generic;
-class Game : MonoBehaviour
-{
-       private Awake()
-       {
-            List<Person> people = new List<Person>();
-            people.Add(new Tony());
-            people.Add(new AnneMarie());
-       }
-}
+		Tony has an array element index of zero and AnneMarie has an array index of one. These can be access like:
 
-Tony has an array element index of zero and AnneMarie has an array index of one. These can be access like:
+		 people[x].Life = 150;
 
- people[x].Life = 150;
+		Classes, methods, Enums, static objects and Getters and Setters {get;set;} should start with capital letters.
+		global key members should be getters and setters. Global means defined inside a class but outside a function.
+		global and non-global types (int, string, float) should use camelCase, where the first word is in lower case, and every other word starts with a capital letter.
+		integer means whole number, float has decimals. Decimal is also a type, a more precise version of float. There's also Double which is another precise type. These are useful when dealing with pi / radius / rotations.
 
-Classes, methods, Enums, static objects and Getters and Setters {get;set;} should start with capital letters.
-global key members should be getters and setters. Global means defined inside a class but outside a function.
-global and non-global types (int, string, float) should use camelCase, where the first word is in lower case, and every other word starts with a capital letter.
-integer means whole number, float has decimals. Decimal is also a type, a more precise version of float. There's also Double which is another precise type. These are useful when dealing with pi / radius / rotations.
+		int number = 5; is the same as
+		Int number {get;set;}=5;, the only difference being the getter/setter is considered a property. Properties are good for data encapsulation, though I can't offer an example or explanation beyond them looking prittier. They don't serialise well with unity however, meaning they won't pop up in the scripts component unless given the tag
+		[serializable]
+		int number {get; set;} = 5;
+		This lets you modify the number during runtime.
 
-int number = 5; is the same as
-Int number {get;set;}=5;, the only difference being the getter/setter is considered a property. Properties are good for data encapsulation, though I can't offer an example or explanation beyond them looking prittier. They don't serialise well with unity however, meaning they won't pop up in the scripts component unless given the tag
-[serializable]
-int number {get; set;} = 5;
-This lets you modify the number during runtime.
-
-Programming is all about problem solving, there's no one-right answer on how  to do things - the only one right answer is persistence.
-	And maybe memes.</p>
+		Programming is all about problem solving, there's no one-right answer on how  to do things - the only one right answer is persistence.
+			And maybe memes.</p>
         </section>
     </body>
 </html>
