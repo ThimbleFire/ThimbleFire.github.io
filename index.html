@@ -19,25 +19,25 @@
 		<p>what is Github?</p>
 
 		<p>Github is a source control application that allows you to share code, team up with other developers, split your code into branches which allows you to safely prototype code without making changes to the main build.
-		Furthermore it allows you to revert your project to an earlier version and look at work you published weeks, months, years ago.
-		Once you have Unity, VS and Github installed, create a github repository. 
-		This is essentially a folder that a project can be placed and developed in. When you make changes to your project you can commit those changes and publish them online.
-		Github is used by millions of developers using all languages, so it's an extremely useful tool to be familiar with.
-		You might be familiar with the term git and are wondering what the difference is between git and GitHub. The best explanation I've heard is that Github is to git what pornhub is to porn.
+		</br>Furthermore it allows you to revert your project to an earlier version and look at work you published weeks, months, years ago.
+		</br>Once you have Unity, VS and Github installed, create a github repository. 
+		</br>This is essentially a folder that a project can be placed and developed in. When you make changes to your project you can commit those changes and publish them online.
+		</br>Github is used by millions of developers using all languages, so it's an extremely useful tool to be familiar with.
+		</br>You might be familiar with the term git and are wondering what the difference is between git and GitHub. The best explanation I've heard is that Github is to git what pornhub is to porn.</p>
 
-		Running unity for the first time
+		<p>Running unity for the first time</p>
 
-		When you launch Unity for the first time and have selected 2D or 3D, you'll find at the bottom of the screen you have a project tab that houses all your assets, though right now it'll be empty. Create a folder called Resources and another called scripts. 
-		The resource folder is especially important because when you load assets during runtime, they can be loaded using the Resources.Load method, which by default uses the Resources folder. For example:
-		Sprite character = Resources.Load("sprites/character_01");
+		<p>When you launch Unity for the first time and have selected 2D or 3D, you'll find at the bottom of the screen you have a project tab that houses all your assets, though right now it'll be empty. Create a folder called Resources and another called scripts. 
+		</br>The resource folder is especially important because when you load assets during runtime, they can be loaded using the Resources.Load method, which by default uses the Resources folder. For example:
+		</br>Sprite character = Resources.Load("sprites/character_01");</p>
 
-		Along the left-hand side of the window you have the gameobject hirarchy. At the top of this window is an add button. Use this to create a cube, or square sprite. If you select the newly made object you'll find its components along the right side of the window. 
-		All world objects have a transform component which stores information about its world position, rotation and scale. It should also have either a 2D or 3D renderer component. If you have a sprite, you can import an image into the Project window, and drag it into the sprite option of the 2D renderer. If its a 3D renderer, you'll need to create a material out of the sprite first. This can be done by right-clicking on the image you imported and navigating to create material. This will automatically create a material using the sprite.
+		<p>Along the left-hand side of the window you have the gameobject hirarchy. At the top of this window is an add button. Use this to create a cube, or square sprite. If you select the newly made object you'll find its components along the right side of the window. 
+		</br>All world objects have a transform component which stores information about its world position, rotation and scale. It should also have either a 2D or 3D renderer component. If you have a sprite, you can import an image into the Project window, and drag it into the sprite option of the 2D renderer. If its a 3D renderer, you'll need to create a material out of the sprite first. This can be done by right-clicking on the image you imported and navigating to create material. This will automatically create a material using the sprite.</p>
 
-		In the objects component list, hit the add component button and create a C# script. VS should automatically pop up with the script open. Scripts all start with an Awake(), Start() and Update() method. These methods are inherited by MonoBehaviour.
-		Awake is good for defining the objects properties. Start is good for initializing the object or anything the object is responsible for. Update is responsible for transforming the object.
+		<p>In the objects component list, hit the add component button and create a C# script. VS should automatically pop up with the script open. Scripts all start with an Awake(), Start() and Update() method. These methods are inherited by MonoBehaviour.
+		</br>Awake is good for defining the objects properties. Start is good for initializing the object or anything the object is responsible for. Update is responsible for transforming the object.</p>
 
-		Programmers will often use the term Good Practice, though we're not very good at agree on what good practice is. You'll find what works best for you over time, but until then it's best to 'say if it works, it works'.
+		<p>Programmers will often use the term Good Practice, though we're not very good at agree on what good practice is. You'll find what works best for you over time, but until then it's best to 'say if it works, it works'.</p>
 
 		In the Update class type:
 		if ( Input.GetKeyDown( "D" ) )
