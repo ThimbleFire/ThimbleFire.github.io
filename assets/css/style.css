@@ -8,8 +8,8 @@
 section{
   display: flex;
   /*justify-content: center;
-  align-items: center;*/
-  min-height: 100vh;
+  align-items: center;
+  min-height: 100vh;*/
   width: 100%;
 
   background: url("../images/background.jpg") fixed no-repeat;
