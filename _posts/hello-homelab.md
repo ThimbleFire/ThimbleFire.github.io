@@ -9,7 +9,7 @@ tags: [testpost]
 
 Hello and welcome to my docs site! 
 
-```
+```c#
 for(int i = 0; i < 5; i++) {
     Console.WriteLine(i);
 }
