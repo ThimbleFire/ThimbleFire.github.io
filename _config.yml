@@ -20,7 +20,7 @@ timezone: Europe/London
 
 title: Always East # the main title
 
-tagline: By hook or by crook we'll get it done # it will display as the sub-title
+tagline: By hook or by crook # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Tony's Github Repositories.
