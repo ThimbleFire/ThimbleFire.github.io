@@ -20,7 +20,7 @@ timezone: Europe/London
 
 title: Always East # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: By hook or by crook we'll get it done # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Tony's Github Repositories.
@@ -76,7 +76,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://pbs.twimg.com/profile_images/1676723527217455104/jyLfWS2J_400x400.jpg
 
 # boolean type, the global switch for TOC in posts.
 toc: true
