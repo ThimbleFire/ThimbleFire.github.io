@@ -1,22 +1,20 @@
 ---
 titles: Hello World
-date: 2023-05-18 07:56:30 -0
+date: 2023-05-18 08:26:31 -0
 categories: [homelab,hardware]  # TAG names should always be lowercase
 tags: [testpost]
 ---
 
 # Welcome
 
-Hello and welcome to my docs site! 
+Yay, got the website running.
 
 ```c#
 for(int i = 0; i < 5; i++) {
-    Console.WriteLine(i);
+    Console.WriteLine("I got it working");
 }
 ```
 
-## Photos
-
 ![img-description](https://pbs.twimg.com/profile_images/1676723527217455104/jyLfWS2J_400x400.jpg)
 
-_That Tony Guy_
+_Hello world ;-)_
