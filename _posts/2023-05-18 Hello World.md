@@ -1,6 +1,6 @@
 ---
 titles: Hello World
-date: 2023-05-18 07:56:30 -500
+date: 2023-05-18 07:56:30 -0
 categories: [homelab,hardware]  # TAG names should always be lowercase
 tags: [testpost]
 ---
