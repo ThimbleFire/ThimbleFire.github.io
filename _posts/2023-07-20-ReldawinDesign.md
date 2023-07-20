@@ -14,14 +14,15 @@ tags: [Reldawin]
 * PC
 
 Built in Unity, utilizing Unity's isometric tilemap and 2D lighting system for shadows and day/night illumination.
-Sprites rendered from models made in blender, rendered in 2D at 8 angles using a python script.
+Sprites rendered from models are made in blender, rendered in 2D at 8 angles using a python script.
 Sprite dimensions are currently undecided but pixel-perfect is the objective.
 
 ## Mapping
 
-Initially the world was generated using a seed and that seed was distributed on connection to generate the base world, then when a player would load a chunk, any modification to that chunk would be sent from the server. This was by no means a bad strategy especially as i didn't have time to build a detailed world.
+Initially the world was generated using a seed and that seed was distributed on connection to generate the base world, then when a player would load a chunk, any modification to that chunk in the editor or by a player in hand would be sent from the server. This was by no means a bad strategy especially as i didn't have time to build a detailed world.
+
 Now I'd like to try a different approach, having a large premade world which tiles are determined by pixel colour.
-That world can be loaded by an editor, specifically it'll load 9 chunks, one of which being interactive, the others simply being there to reveal how the center chunk melds with its surroundings.
+That world can be loaded by an editor, specifically it'll load 9 chunks, the center one being interactive, the others simply being there to reveal how the center chunk melds with its surroundings.
 This will require building a custom editor that allows for connecting and disconnecting to the server while the game isn't running.
 
 Tiles will include seamless variations of the following tiles:
@@ -50,7 +51,6 @@ when a withered tree grows it is removed from the game.
 * Old trees yield 3 logs
 * Withered trees yields 1 log
 * Sprouts yield nothing but can be picked using a sickle
-* 
 
 ## Player Character
 
@@ -90,21 +90,19 @@ There's a search function to find recipes.
 
 ### Minimap
 
-If the player gets a papyrus they can start recording map data. This item does not take up an inventory slot, however it is dropped on death.
+If the player gets a papyrus they can start recording map data. This item does not take up an inventory slot.
 
 ### Items
 
 #### Rune Stones
 
 Runestones are to be incredibly rare drops when performing gathering actions.
-Starting at Zos and working backwards in the below list the droprate is 0.00001 ° n, giving the Af rune the highest chance to do at 0.00016.
-
-Af, Afn, Mer, Esh, Null, Lor, Ren, Odd, Nemen, Aki, Fay, Reegr, Leth, Vi, Bach, Zos.
+In ascending order of rarity there's Af, Afn, Mer, Esh, Null, Lor, Ren, Odd, Nemen, Aki, Fay, Reegr, Leth, Vi, Bach, Zos.
 
 #### Equipment
 
-Items aren't dropped by NPCs and can only be aquired by manufacturing. Items cannot be upgraded and all manufactured items of the same type are equal. Certain weapon types however are better vs. certain armour types.
-Players can produce socketable variants at a hefty cost which can have rune stones inserted to give the item prefixes and suffixes depending on the order the sigils were inserted. These artefacts are insanely rare.
+Equioment isn't dropped by NPCs and can only be aquired by manufacturing. Items cannot be upgraded and all manufactured items of the same type are equal. Certain weapon types however are better vs. certain armour types.
+Players can produce socketable variants at a hefty cost which can have rune stones inserted to give them item prefixes and suffixes depending on the order the stones were inserted. These artefacts are insanely rare.
 
 ### Recipes
 
@@ -140,14 +138,12 @@ Doors cannot currently be locked
 ### Land Claim
 
 Players can claim land using a Settlement token which can be built from the carpentry window. the maximum and default size is 30x30.
-players can enter your claim and kill you, but they can't open doors or loot containers, including dead bodies (not including their own).
+players can enter your claim and kill you, but they can't loot containers, including dead bodies (not including their own), or take items from the ground. They can't utilize facilities in this region or harvest crops. There's currently no system in place to allow friends to do anything in your claim.
 
 ## Online
 
 Player's overhead names are by default questionmarks.
-What users choose to make others is entirely up to them.
-There is an acquaintance list where players can name each other, add notes and flag as friend or foe, changing their mouse-over outline and overhead name label.
-
----
+What users choose to name others is entirely up to them.
+There is an acquaintance list where players can name each other, add notes and flag players as friend or foe, changing their mouse-over outline and overhead name label.
 
 This is a work in progress.
