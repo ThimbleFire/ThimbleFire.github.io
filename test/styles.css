@@ -1,0 +1,118 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Header Styles */
+header {
+    background-color: #2b2b2b;
+    color: white;
+    padding: 15px 0;
+}
+
+header .logo h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #35495e;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
+
+.cta-btn {
+    background-color: #a57c56;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #8f5b39;
+}
+
+/* Features Section */
+.features {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.features h3 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    display: inline-block;
+    width: 30%;
+    margin: 0 15px;
+    background-color: #e3e3e3;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.feature-item h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    font-size: 1rem;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2b2b2b;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
