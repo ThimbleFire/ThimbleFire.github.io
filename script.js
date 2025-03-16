@@ -3,7 +3,7 @@ const scene = new THREE.Scene();
 
 // Set up orthographic camera
 const aspect = window.innerWidth / window.innerHeight;
-const frustumSize = 17 * 16;  // 17 tiles, each 16px wide, so the total size is 272px
+const frustumSize = 272;  // Total size of the tilemap (17 * 16 = 272px)
 const camera = new THREE.OrthographicCamera(
   -frustumSize / 2,    // left
   frustumSize / 2,     // right
@@ -13,8 +13,9 @@ const camera = new THREE.OrthographicCamera(
   1000                 // far
 );
 
-// Set camera position
+// Position the camera slightly further back to ensure visibility of the tilemap
 camera.position.z = 10;
+camera.position.y = 0; // Center vertically if needed
 
 // Renderer setup
 const renderer = new THREE.WebGLRenderer();
