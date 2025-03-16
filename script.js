@@ -25,18 +25,25 @@ document.body.appendChild(renderer.domElement);
 const tileSize = 16;
 const mapSize = 17;  // 17x17 tilemap
 
-// Create a material for the tiles
-const tileMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+// Create a checkerboard pattern with black and white tiles
+const createTile = (x, y) => {
+  const tileGeometry = new THREE.PlaneGeometry(tileSize, tileSize);
+  
+  // Alternate between black and white colors based on the tile position
+  const isBlack = (x + y) % 2 === 0;  // Checkerboard pattern
+  const tileMaterial = new THREE.MeshBasicMaterial({ color: isBlack ? 0x000000 : 0xFFFFFF });
+  
+  const tile = new THREE.Mesh(tileGeometry, tileMaterial);
+  
+  // Position tiles to form a grid centered in the window
+  tile.position.set(x * tileSize - (mapSize * tileSize) / 2, y * tileSize - (mapSize * tileSize) / 2, 0);
+  scene.add(tile);
+};
 
-// Create tiles
-const tiles = [];
+// Create the checkerboard tilemap
 for (let i = 0; i < mapSize; i++) {
   for (let j = 0; j < mapSize; j++) {
-    const tileGeometry = new THREE.PlaneGeometry(tileSize, tileSize);
-    const tile = new THREE.Mesh(tileGeometry, tileMaterial);
-    tile.position.set(i * tileSize - (mapSize * tileSize) / 2, j * tileSize - (mapSize * tileSize) / 2, 0); // Positioning tiles
-    scene.add(tile);
-    tiles.push(tile);
+    createTile(i, j);
 }
 
 // Resize event handling to update camera and renderer
