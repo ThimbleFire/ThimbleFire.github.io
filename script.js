@@ -1,41 +1,60 @@
 // Scene setup
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+// Set up orthographic camera
+const aspect = window.innerWidth / window.innerHeight;
+const frustumSize = 17 * 16;  // 17 tiles, each 16px wide, so the total size is 272px
+const camera = new THREE.OrthographicCamera(
+  -frustumSize / 2,    // left
+  frustumSize / 2,     // right
+  frustumSize / 2 / aspect,  // top
+  -frustumSize / 2 / aspect, // bottom
+  0.1,                 // near
+  1000                 // far
+);
+
+// Set camera position
+camera.position.z = 10;
 
 // Renderer setup
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create a cube geometry and material, then create a mesh
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
+// Tile size and map dimensions
+const tileSize = 16;
+const mapSize = 17;  // 17x17 tilemap
 
-// Add the cube to the scene
-scene.add(cube);
+// Create a material for the tiles
+const tileMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
-// Position the camera
-camera.position.z = 5;
+// Create tiles
+const tiles = [];
+for (let i = 0; i < mapSize; i++) {
+  for (let j = 0; j < mapSize; j++) {
+    const tileGeometry = new THREE.PlaneGeometry(tileSize, tileSize);
+    const tile = new THREE.Mesh(tileGeometry, tileMaterial);
+    tile.position.set(i * tileSize - (mapSize * tileSize) / 2, j * tileSize - (mapSize * tileSize) / 2, 0); // Positioning tiles
+    scene.add(tile);
+    tiles.push(tile);
+}
+
+// Resize event handling to update camera and renderer
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  const aspect = window.innerWidth / window.innerHeight;
+  camera.left = -frustumSize / 2;
+  camera.right = frustumSize / 2;
+  camera.top = frustumSize / 2 / aspect;
+  camera.bottom = -frustumSize / 2 / aspect;
+  camera.updateProjectionMatrix();
+});
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
-
-  // Rotate the cube
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-
-  // Render the scene from the perspective of the camera
   renderer.render(scene, camera);
 }
 
-// Resize handler to adjust camera aspect ratio when resizing the window
-window.addEventListener('resize', () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-});
-
-// Start the animation
+// Start the animation loop
 animate();
