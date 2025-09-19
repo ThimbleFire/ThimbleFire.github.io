@@ -1,6 +1,7 @@
 export class TileMap {
-    constructor(ctx) {
+    constructor(ctx, pathfinding) {
         this.ctx = ctx;
+        this.pathfinding = pathfinding
         this.image = new Image();
         this.tileSize = 16;
         this.columns = 32;
@@ -13,9 +14,47 @@ export class TileMap {
         });
     }
 
+    async load_map(url) {
+        const response = await fetch(url);
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "application/xml");
+
+        const map = xml.querySelector("map");
+        this.tileSize = parseInt(map.getAttribute("tilewidth"));
+        this.columns = parseInt(map.getAttribute("width"));
+        this.rows = parseInt(map.getAttribute("height"));
+
+        const tileset = xml.querySelector("tileset image");
+
+        this.layers = [];
+        xml.querySelectorAll("layer").forEach(layer => {
+            const data = layer.querySelector("data").textContent.trim();
+            const name = layer.getAttribute("name");
+            const grid = data.split(",").map(n => parseInt(n));
+            this.layers.push(grid);
+            if(name == "Blocked")
+            {
+                this.pathfinding.setup(grid, this.columns, this.rows);
+            }
+        });
+    }
+
+    draw() {
+        this.layers.forEach(layer => {
+            layer.forEach((tile, i) => {
+                if (tile === 0) return; // 0 = empty
+                const x = (i % this.columns) * this.tileSize;
+                const y = Math.floor(i / this.columns) * this.tileSize;
+                this.drawTile(tile - 1, x, y);
+            });
+        });
+    }
+
     drawTile(index, x, y) {
-        const tileX = (index % this.columns) * this.tileSize;
-        const tileY = Math.floor(index / this.columns) * this.tileSize;
+        const tilesPerRow = this.image.width / this.tileSize;
+        const tileX = (index % tilesPerRow) * this.tileSize;
+        const tileY = Math.floor(index / tilesPerRow) * this.tileSize;
 
         this.ctx.drawImage(
             this.image,

@@ -24,7 +24,7 @@ export class Input {
 
     updateMovementVector() {
         const x = (this.keys['d'] ? 1 : 0) + (this.keys['a'] ? -1 : 0);
-        const y = (this.keys['w'] ? 1 : 0) + (this.keys['s'] ? -1 : 0);
+        const y = (this.keys['s'] ? 1 : 0) + (this.keys['w'] ? -1 : 0);
         this.movementVector = { x, y };
     }
 }
