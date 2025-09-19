@@ -1,5 +1,6 @@
-export class Player extends Character {
+import { Character } from './character.js';
 
+export class Player extends Character {
     constructor(name, x, y, ctx, input) {
         super(name, x, y, ctx)
         this.input = input
