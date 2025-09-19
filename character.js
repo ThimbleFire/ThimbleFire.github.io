@@ -25,7 +25,6 @@ export class Character {
     update(delta) {
         // Cycle animation frames based on time
         this.frameTime += delta;
-        console.log(`${this.name} update called with delta: ${delta}. frameTime is now: ${this.frameTime}`);
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
             this.frameIndex = (this.frameIndex + 1) % this.columns;
@@ -35,7 +34,6 @@ export class Character {
     draw() {
         const sx = (this.frameIndex % this.columns) * this.frameWidth;
         const sy = 0; // only animating first row for now
-        // console.log(`Animation area: ${sx}, ${sy}, ${this.frameWidth}, ${this.frameHeight}`);
 
         this.ctx.drawImage(
             this.image,
