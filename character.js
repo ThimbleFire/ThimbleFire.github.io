@@ -8,7 +8,7 @@ export class Character {
         this.image = new Image();
         this.frameWidth = 16;
         this.frameHeight = 16;
-        this.currentAnimation = 'idleDown';
+        this.currentAnimation = 'walkDown';
         this.frameIndex = 0;
         this.frameTime = 0.0;        
         this.frameDuration = 600; // milliseconds per frame
@@ -68,7 +68,7 @@ export class Character {
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
             this.frameIndex = (this.frameIndex + 1) % frames.length;
-            console.log(`frame time: ${this.frameTime} frame length: ${frames.length}, frame index: ${this.frameIndex}`);
+            console.log(`frame index: ${this.frameIndex}`);
         }
     }
 
