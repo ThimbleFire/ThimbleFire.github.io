@@ -21,8 +21,32 @@ export class Game {
     }
 
     start() {
+        requestAnimationFrame(this.loop.bind(this)); // Start game loop
+    }
+
+    loop(timestamp) {
+        const delta = timestamp - this.lastTimestamp;
+        this.lastTimestamp = timestamp;
+
+        this.update(delta);
+        this.render();
+
+        requestAnimationFrame(this.loop.bind(this)); // Continue loop
+    }
+
+    update(delta) {
+        for (const character of this.characters) {
+            character.update(delta); // animation, movement, etc.
+        }
+    }
+
+    render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.tilemap.drawTile(5, 100, 100);  // draw tile #5
-        this.characters.forEach(character => character.drawFrame(2));  // draw frame #2
+
+        this.tilemap.drawTile(5, 100, 100);
+
+        for (const character of this.characters) {
+            character.draw();
+        }
     }
 }
