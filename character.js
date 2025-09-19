@@ -6,9 +6,9 @@ export class Character {
         this.ctx = ctx;
 
         this.image = new Image();
-        this.frameWidth = 64;
-        this.frameHeight = 64;
-        this.columns = 4;
+        this.frameWidth = 16;
+        this.frameHeight = 16;
+        this.columns = 3;
     }
 
     async load(src) {
