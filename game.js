@@ -1,6 +1,7 @@
 import { Character } from './character.js';
 import { TileMap } from './tilemap.js';
 import { Input } from './InputListener.js';
+import { Player } from './player.js';
 
 export class Game {
     constructor() {
@@ -11,9 +12,10 @@ export class Game {
         this.tilemap = new TileMap(this.ctx);
         this.characters = [
             new Character("Blaze", 200, 100, this.ctx),
-            new Character("Frost", 300, 100, this.ctx)
+            // new Character("Frost", 300, 100, this.ctx)
         ];
         this.input = new Input();
+        this.player = new Player(this.input);
     }
 
     async load() {
