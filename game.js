@@ -35,7 +35,6 @@ export class Game {
     }
 
     update(delta) {
-        console.log(`Animation tick. Delta: ${delta.toFixed(2)}ms`);
         for (const character of this.characters) {
             character.update(delta); // animation, movement, etc.
         }
