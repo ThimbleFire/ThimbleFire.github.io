@@ -4,15 +4,21 @@ export class Input {
         this.movementVector = { x: 0, y: 0 };
 
         window.addEventListener('keydown', (e) => {
-            this.keys[e.key.toLowerCase()] = true;
-            this.updateMovementVector();
-            console.log(`keydown: ${e.key}`);
+            const key = e.key.toLowerCase();
+            if( this.keys[key] == false) {
+                this.keys[key] = true;
+                this.updateMovementVector();
+                console.log(`keydown: ${e.key}`);
+            }
         });
 
         window.addEventListener('keyup', (e) => {
-            this.keys[e.key.toLowerCase()] = false;
-            this.updateMovementVector();
-            console.log(`keyup: ${e.key}`);
+            const key = e.key.toLowerCase();
+            if (this.keys[key] === true) {
+                this.keys[key] = false;
+                this.updateMovementVector();
+                console.log(`keyup: ${e.key}`);
+            }
         });
     }
 
