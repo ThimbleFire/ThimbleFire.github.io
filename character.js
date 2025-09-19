@@ -34,6 +34,7 @@ export class Character {
     draw() {
         const sx = (this.frameIndex % this.columns) * this.frameWidth;
         const sy = 0; // only animating first row for now
+        console.log(`Animation area: ${sx}, ${sy}, ${this.frameWidth}, ${this.frameHeight}`);
 
         this.ctx.drawImage(
             this.image,
