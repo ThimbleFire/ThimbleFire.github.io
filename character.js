@@ -9,6 +9,10 @@ export class Character {
         this.frameWidth = 16;
         this.frameHeight = 16;
         this.columns = 3;
+
+        this.frameIndex = 0;
+        this.frameTime = 0;
+        this.frameDuration = 200; // milliseconds per frame
     }
 
     async load(src) {
@@ -17,10 +21,19 @@ export class Character {
             this.image.src = src;
         });
     }
+    
+    update(delta) {
+        // Cycle animation frames based on time
+        this.frameTime += delta;
+        if (this.frameTime >= this.frameDuration) {
+            this.frameTime = 0;
+            this.frameIndex = (this.frameIndex + 1) % this.columns;
+        }
+    }
 
-    drawFrame(frameIndex) {
-        const sx = (frameIndex % this.columns) * this.frameWidth;
-        const sy = Math.floor(frameIndex / this.columns) * this.frameHeight;
+    draw() {
+        const sx = (this.frameIndex % this.columns) * this.frameWidth;
+        const sy = 0; // only animating first row for now
 
         this.ctx.drawImage(
             this.image,
