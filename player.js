@@ -11,6 +11,8 @@ export class Player extends Character {
     update(delta) {
         const movement = this.input.movementVector;
 
+        console.log(`movement: ${movement.x}, ${movement.y}`);
+        
         this.x += movement.x * delta * 0.16;
         this.y += movement.y * delta * 0.16;
     }
