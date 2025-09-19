@@ -1,11 +1,33 @@
 export class Character {
-    constructor(name, trait) {
+    constructor(name, x, y, ctx) {
         this.name = name;
-        this.hp = 100;
-        this.trait = trait;  // this can be any object/class
+        this.x = x;
+        this.y = y;
+        this.ctx = ctx;
+
+        this.image = new Image();
+        this.frameWidth = 64;
+        this.frameHeight = 64;
+        this.columns = 4;
     }
 
-    describe() {
-        console.log(`${this.name} has trait: ${this.trait.describe?.() || this.trait}`);
+    async load(src) {
+        return new Promise(resolve => {
+            this.image.onload = resolve;
+            this.image.src = src;
+        });
+    }
+
+    drawFrame(frameIndex) {
+        const sx = (frameIndex % this.columns) * this.frameWidth;
+        const sy = Math.floor(frameIndex / this.columns) * this.frameHeight;
+
+        this.ctx.drawImage(
+            this.image,
+            sx, sy,
+            this.frameWidth, this.frameHeight,
+            this.x, this.y,
+            this.frameWidth, this.frameHeight
+        );
     }
 }
