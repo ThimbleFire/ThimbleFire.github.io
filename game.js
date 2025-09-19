@@ -28,6 +28,8 @@ export class Game {
         const delta = timestamp - this.lastTimestamp;
         this.lastTimestamp = timestamp;
 
+        console.log(`Game loop running. Delta: ${delta.toFixed(2)}ms`);
+
         this.update(delta);
         this.render();
 
