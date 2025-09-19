@@ -15,7 +15,7 @@ export class Game {
             // new Character("Frost", 300, 100, this.ctx)
         ];
         this.input = new Input();
-        this.player = new Player(this.input);
+        this.player = new Player("Tony", 300, 100, this.ctx, this.input);
     }
 
     async load() {
