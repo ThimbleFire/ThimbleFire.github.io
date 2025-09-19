@@ -1,5 +1,6 @@
 import { Character } from './character.js';
 import { TileMap } from './tilemap.js';
+import { Input } from './InputListener.js';
 
 export class Game {
     constructor() {
