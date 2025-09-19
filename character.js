@@ -25,10 +25,10 @@ export class Character {
     update(delta) {
         // Cycle animation frames based on time
         this.frameTime += delta;
+        console.log(`${this.name} frameIndex updated to: ${this.frameIndex}`);
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
             this.frameIndex = (this.frameIndex + 1) % this.columns;
-            console.log(`${this.name} frameIndex updated to: ${this.frameIndex}`);
         }
     }
 
