@@ -12,7 +12,7 @@ export class Character {
 
         this.frameIndex = 0;
         this.frameTime = 0;
-        this.frameDuration = 200; // milliseconds per frame
+        this.frameDuration = 600; // milliseconds per frame
     }
 
     async load(src) {
@@ -28,13 +28,14 @@ export class Character {
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
             this.frameIndex = (this.frameIndex + 1) % this.columns;
+            console.log(`${this.name} frameIndex updated to: ${this.frameIndex}`);
         }
     }
 
     draw() {
         const sx = (this.frameIndex % this.columns) * this.frameWidth;
         const sy = 0; // only animating first row for now
-        console.log(`Animation area: ${sx}, ${sy}, ${this.frameWidth}, ${this.frameHeight}`);
+        // console.log(`Animation area: ${sx}, ${sy}, ${this.frameWidth}, ${this.frameHeight}`);
 
         this.ctx.drawImage(
             this.image,
