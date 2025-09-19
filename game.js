@@ -12,6 +12,7 @@ export class Game {
             new Character("Blaze", 200, 100, this.ctx),
             new Character("Frost", 300, 100, this.ctx)
         ];
+        this.input = new Input();
     }
 
     async load() {
