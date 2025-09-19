@@ -68,6 +68,7 @@ export class Character {
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
             this.frameIndex = (this.frameIndex + 1) % frames.length;
+            console.log(`frame time: ${this.frameTime} frame length: ${this.frames.length}, frame index: ${this.frameIndex}`);
         }
     }
 
