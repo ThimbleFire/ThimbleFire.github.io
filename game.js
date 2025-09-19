@@ -1,37 +1,28 @@
 import { Character } from './character.js';
-
-// Just a demonstration class to pass into Character
-class FireTrait {
-    describe() {
-        return "Fire Affinity";
-    }
-}
-
-class IceTrait {
-    describe() {
-        return "Ice Affinity";
-    }
-}
+import { TileMap } from './tilemap.js';
 
 export class Game {
     constructor() {
-        this.characters = [];  // list of Character instances
+        this.canvas = document.getElementById('gameCanvas');
+        this.ctx = this.canvas.getContext('2d');
+
+        this.tilemap = new TileMap(this.ctx);
+        this.characters = [
+            new Character("Blaze", 200, 100, this.ctx),
+            new Character("Frost", 300, 100, this.ctx)
+        ];
     }
 
-    createCharacters() {
-        const fireTrait = new FireTrait();
-        const iceTrait = new IceTrait();
-
-        // Create characters and assign different traits
-        const char1 = new Character("Blaze", fireTrait);
-        const char2 = new Character("Frost", iceTrait);
-
-        // Add them to the game
-        this.characters.push(char1, char2);
+    async load() {
+        await Promise.all([
+            this.tilemap.load('./tilemap.png'),
+            ...this.characters.map(c => c.load('./character.png'))
+        ]);
     }
 
-    run() {
-        console.log("Game started. Characters:");
-        this.characters.forEach(character => character.describe());
+    start() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.tilemap.drawTile(5, 100, 100);  // draw tile #5
+        this.characters.forEach(character => character.drawFrame(2));  // draw frame #2
     }
 }
