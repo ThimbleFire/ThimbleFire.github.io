@@ -11,7 +11,7 @@ export class Character {
         this.columns = 3;
 
         this.frameIndex = 0;
-        this.frameTime = 0;
+        this.frameTime = 0.0;
         this.frameDuration = 600; // milliseconds per frame
     }
 
