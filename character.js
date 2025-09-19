@@ -8,10 +8,9 @@ export class Character {
         this.image = new Image();
         this.frameWidth = 16;
         this.frameHeight = 16;
-        this.columns = 3;
-
+        this.currentAnimation = 'idleDown';
         this.frameIndex = 0;
-        this.frameTime = 0.0;
+        this.frameTime = 0.0;        
         this.frameDuration = 600; // milliseconds per frame
 
         this.animations = {
@@ -52,25 +51,35 @@ export class Character {
             this.image.src = src;
         });
     }
+
+    setAnimation(name) {
+        if (this.currentAnimation !== name) {
+            this.currentAnimation = name;
+            this.frameIndex = 0;
+            this.frameTime = 0;
+        }
+    }
     
     update(delta) {
         // Cycle animation frames based on time
         this.frameTime += delta;
+        const frames = this.animations[this.currentAnimation];
+        
         if (this.frameTime >= this.frameDuration) {
             this.frameTime = 0;
-            this.frameIndex = (this.frameIndex + 1) % this.columns;
+            this.frameIndex = (this.frameIndex + 1) % frames.length;
         }
     }
 
     draw() {
-        const sx = (this.frameIndex % this.columns) * this.frameWidth;
-        const sy = 0; // only animating first row for now
-
+        const frames = this.animations[this.currentAnimation];
+        const frame = frames[this.frameIndex];
+    
         this.ctx.drawImage(
             this.image,
-            sx, sy,
+            frame.x, frame.y,           // Source x/y
             this.frameWidth, this.frameHeight,
-            this.x, this.y,
+            this.x, this.y,             // Destination x/y
             this.frameWidth, this.frameHeight
         );
     }
