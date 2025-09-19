@@ -73,28 +73,36 @@ export class Character extends SceneObject {
         this.velocity = { x: 0, y: 0 };
 
         if (this.chain.length === 0) {
-            // Flatten 2D nodes array
-            const allNodes = this.pathfinding.nodes.flat();
-            const walkables = allNodes.filter(n => n.walkable);
-
-            if (walkables.length > 0) {
-                const target = walkables[Math.floor(Math.random() * walkables.length)];
-                const path = this.pathfinding.buildPath(this.cell, target.cell, 0);
-                if (path.length > 0) {
-                    this.chain = path.slice();
-                }
-            }
+            this._on_destination_reached();
         }
-        else {
-            const remainingDistance = this.transform.MoveToward(this.chain[0].position, delta, 60.0);
+        else
+        {
+            this.remainingDistance = this.transform.MoveToward(this.chain[0].position, delta, 60.0);
 
-            if (remainingDistance <= 4) {
-                this.cell = { x: this.chain[0].cell.x, y: this.chain[0].cell.y };
-                this.chain.shift();
+            if (this.remainingDistance <= .64) {
+                this._on_tile_changed();
             }
         }
     }
 
+    _on_tile_changed() {
+        this.cell = this.chain[0].cell;
+        this.transform.position = this.chain[0].position;
+        this.chain.shift();
+    }
+
+    _on_destination_reached() {
+        const allNodes = this.pathfinding.nodes.flat();
+        const walkables = allNodes.filter(n => n.walkable);
+
+        if (walkables.length > 0) {
+            const target = walkables[Math.floor(Math.random() * walkables.length)];
+            const path = this.pathfinding.buildPath(this.cell, target.cell, 2);
+            if (path.length > 0) {
+                this.chain = path.slice();
+            }
+        }
+    }
 
     update_animation(delta) {
         if(this.velocity != this.lastVelocity)

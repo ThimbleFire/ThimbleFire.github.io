@@ -117,7 +117,7 @@ export class Pathfinding {
 
         let goalNode = this.getNode(goal);
         if (!goalNode || !goalNode.walkable) {
-            let altNeighbors = this.getNeighbors(this.getNode(goal), 2);
+            let altNeighbors = this.getNeighbors(this.getNode(goal), mode);
             altNeighbors.sort((a, b) => {
                 let da = Math.hypot(start.x - a.cell.x, start.y - a.cell.y);
                 let db = Math.hypot(start.x - b.cell.x, start.y - b.cell.y);

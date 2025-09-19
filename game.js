@@ -1,9 +1,8 @@
-import { Character } from './character.js';
+import { NPC } from './npc.js';
 import { TileMap } from './tilemap.js';
 import { Input } from './InputListener.js';
 import { Player } from './player.js';
 import { Pathfinding } from './pathfinding.js';
-import { NodePF } from './pathfinding.js';
 
 export class Game {
     constructor() {
@@ -15,18 +14,18 @@ export class Game {
         this.pathfinding = new Pathfinding();
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
         this.characters = [
-            new Character("Blaze", {x:5, y:7}, this.ctx, this.pathfinding),
+            new NPC("Blaze", {x:5, y:7}, this.ctx, this.pathfinding),
             //new Character("Frost", {x:4, y:7}, this.ctx, this.pathfinding)
         ];
         this.input = new Input();
-        //this.player = new Player("Tony", {x:6, y:8}, this.ctx, this.input, this.pathfinding);
+        this.player = new Player("Tony", {x:6, y:8}, this.ctx, this.input, this.pathfinding);
     }
 
     async load() {
         await Promise.all([
             this.tilemap.load('./tilemap.png'),
             this.tilemap.load_map('./map.tmx'),
-            //this.player.load('./character.png'),
+            this.player.load('./character.png'),
             ...this.characters.map(c => c.load('./character.png')),
         ]);
     }
@@ -49,7 +48,7 @@ export class Game {
         for (const character of this.characters) {
             character.update(delta); // animation, movement, etc.
         }
-        //this.player.update(delta);
+        this.player.update(delta);
     }
 
     render() {
@@ -60,6 +59,6 @@ export class Game {
         for (const character of this.characters) {
             character.draw();
         }
-        //this.player.draw();
+        this.player.draw();
     }
 }
