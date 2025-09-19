@@ -36,6 +36,7 @@ export class Game {
 
     update(delta) {
         for (const character of this.characters) {
+            console.log(`calling character.update`);
             character.update(delta); // animation, movement, etc.
         }
     }
