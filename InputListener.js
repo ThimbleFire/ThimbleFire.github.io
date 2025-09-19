@@ -5,20 +5,20 @@ export class Input {
 
         window.addEventListener('keydown', (e) => {
             const key = e.key.toLowerCase();
-            if( this.keys[key] == false) {
+            //if( this.keys[key] == false) {
                 this.keys[key] = true;
                 this.updateMovementVector();
                 console.log(`keydown: ${e.key}`);
-            }
+            //}
         });
 
         window.addEventListener('keyup', (e) => {
             const key = e.key.toLowerCase();
-            if (this.keys[key] === true) {
+            //if (this.keys[key] === true) {
                 this.keys[key] = false;
                 this.updateMovementVector();
                 console.log(`keyup: ${e.key}`);
-            }
+            //}
         });
     }
 
