@@ -37,15 +37,14 @@ export class Game {
 
     update(delta) {
         for (const character of this.characters) {
-            console.log(`calling character.update`);
             character.update(delta); // animation, movement, etc.
         }
     }
 
     render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.tilemap.drawTile(5, 100, 100);
+        
+        this.tilemap.drawTile(1, 100, 100);
 
         for (const character of this.characters) {
             character.draw();
