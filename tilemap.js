@@ -2,8 +2,8 @@ export class TileMap {
     constructor(ctx) {
         this.ctx = ctx;
         this.image = new Image();
-        this.tileSize = 32;
-        this.columns = 8;
+        this.tileSize = 8;
+        this.columns = 32;
     }
 
     async load(src) {
