@@ -15,7 +15,7 @@ export class Game {
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
         this.characters = [
             new NPC("Blaze", {x:5, y:7}, this.ctx, this.pathfinding),
-            //new Character("Frost", {x:4, y:7}, this.ctx, this.pathfinding)
+            new NPC("Frost", {x:4, y:7}, this.ctx, this.pathfinding)
         ];
         this.input = new Input();
         this.player = new Player("Tony", {x:6, y:8}, this.ctx, this.input, this.pathfinding);

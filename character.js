@@ -17,13 +17,15 @@ export class Character extends SceneObject {
         this.currentAnimation = 'walkDown';
         this.frameIndex = 0;
         this.frameTime = 0.0;        
-        this.frameDuration = 600; // milliseconds per frame
+        this.frameDuration = 150; // milliseconds per frame
+        this.movement_speed = 40;
+        this.moving = false;
 
         this.chain = [];
 
 
-        this.velocity = { x: 0, y: 0 };
-        this.lastVelocity = { x: 0, y: 0 };
+        this.direction = { x: 0, y: 0 };
+        this.lastDirection = { x: 0, y: 0 };
 
         this.animations = {
             walkDown: [
@@ -47,9 +49,9 @@ export class Character extends SceneObject {
                 { x: 144, y: 0 }
             ],
             idleDown: [ { x: 16, y: 0 } ],
-            idleRight: [ { x: 64, y: 0 } ],
-            idleLeft: [ { x: 112, y: 0 } ],
-            idleUp: [ { x: 160, y: 0 } ]
+            idleRight: [ { x: 128, y: 0 } ],
+            idleLeft: [ { x: 96, y: 0 } ],
+            idleUp: [ { x: 64, y: 0 } ]
         };
     }
 
@@ -70,15 +72,19 @@ export class Character extends SceneObject {
     
     update(delta) {
         this.update_animation(delta);
-        this.velocity = { x: 0, y: 0 };
-
+        this.direction = { x: 0, y: 0 };
         if (this.chain.length === 0) {
             this._on_destination_reached();
         }
         else
         {
-            this.remainingDistance = this.transform.MoveToward(this.chain[0].position, delta, 60.0);
-
+            this.remainingDistance = this.transform.MoveToward(this.chain[0].position, delta, this.movement_speed);
+                
+            this.direction = { 
+                x: this.chain[0].cell.x - this.cell.x, 
+                y: this.chain[0].cell.y - this.cell.y
+            };
+        
             if (this.remainingDistance <= .64) {
                 this._on_tile_changed();
             }
@@ -86,39 +92,28 @@ export class Character extends SceneObject {
     }
 
     _on_tile_changed() {
-        this.cell = this.chain[0].cell;
-        this.transform.position = this.chain[0].position;
-        this.chain.shift();
+        
     }
 
     _on_destination_reached() {
-        const allNodes = this.pathfinding.nodes.flat();
-        const walkables = allNodes.filter(n => n.walkable);
-
-        if (walkables.length > 0) {
-            const target = walkables[Math.floor(Math.random() * walkables.length)];
-            const path = this.pathfinding.buildPath(this.cell, target.cell, 2);
-            if (path.length > 0) {
-                this.chain = path.slice();
-            }
-        }
+        
     }
 
     update_animation(delta) {
-        if(this.velocity != this.lastVelocity)
+        if(this.direction != this.lastDirection)
         {
-            this.lastVelocity = this.velocity;
-            if (this.velocity.y == 1) {
-                this.setAnimation("walkDown");
+            this.lastDirection = this.direction;
+            if (this.direction.y == 1) {
+                this.setAnimation(this.moving ? "walkDown" : "idleDown");
             }
-            if (this.velocity.y == -1) {
-                this.setAnimation("walkUp");
+            if (this.direction.y == -1) {
+                this.setAnimation(this.moving ? "walkUp" : "idleUp");
             }
-            if (this.velocity.x == -1) {
-                this.setAnimation("walkLeft");
+            if (this.direction.x == -1) {
+                this.setAnimation(this.moving ? "walkLeft" : "idleLeft");
             }
-            if (this.velocity.x == 1) {
-                this.setAnimation("walkRight");
+            if (this.direction.x == 1) {
+                this.setAnimation(this.moving ? "walkRight" : "idleRight");
             }
         }
 
