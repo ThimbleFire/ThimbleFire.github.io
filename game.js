@@ -43,6 +43,7 @@ export class Game {
         for (const character of this.characters) {
             character.update(delta); // animation, movement, etc.
         }
+        this.player.update(delta);
     }
 
     render() {
@@ -52,6 +53,7 @@ export class Game {
 
         for (const character of this.characters) {
             character.draw();
+        this.player.draw();
         }
     }
 }
