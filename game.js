@@ -5,7 +5,8 @@ export class Game {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
-
+        this.lastTimestamp = performance.now();
+        
         this.tilemap = new TileMap(this.ctx);
         this.characters = [
             new Character("Blaze", 200, 100, this.ctx),
