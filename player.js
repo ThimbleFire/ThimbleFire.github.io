@@ -4,16 +4,12 @@ export class Player extends Character {
     constructor(name, x, y, ctx, input) {
         super(name, x, y, ctx)
         this.input = input
-        this.x = x
-        this.y = y
     }
 
     update(delta) {
         const movement = this.input.movementVector;
-
-        console.log(`movement: ${movement.x}, ${movement.y}`);
         
-        this.x += movement.x * delta * 0.16;
-        this.y += movement.y * delta * 0.16;
+        this.x += movement.x * delta * 1.6;
+        this.y += movement.y * delta * 1.6;
     }
 }
