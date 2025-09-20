@@ -10,23 +10,25 @@ export class Game {
         this.ctx = this.canvas.getContext('2d');
         this.ctx.imageSmoothingEnabled = false;
         this.lastTimestamp = performance.now();
+        this.characters = [];
+        this.triggers = [];
         
         this.pathfinding = new Pathfinding();
         this.modules = [];
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
-        this.characters = [
-            new NPC("Blaze", {x:5, y:6}, this.ctx, this.pathfinding),
-            new NPC("Frost", {x:6, y:7}, this.ctx, this.pathfinding)
-        ];
         this.input = new Input();
-        this.player = new Player("Tony", {x:6, y:5}, this.ctx, this.input, this.pathfinding);
-        this.input.onKey("e", "down", () => {
+        this.player = new Player("Tony", {x:0, y:0}, this.ctx, this.input, this.pathfinding, (filename) => { this.load(filename); });
+        this.input.onKey("e", "down", async () => {
             // get the cell 1 tile infront of the player character
-            const cellInFrontOfPlayer = { x: this.player.cell.x + this.player.lastDirection.x, y: this.player.cell.y + this.player.lastDirection.y};
+            const cellInFrontOfPlayer = { 
+                x: this.player.cell.x + this.player.lastDirection.x, 
+                y: this.player.cell.y + this.player.lastDirection.y
+            };
             // search for modules in that tile
             for (const module of this.modules) {
                 if (module.cell.x == cellInFrontOfPlayer.x && module.cell.y == cellInFrontOfPlayer.y) {
                     module.subscribe(this.player);
+                    return
                 }
             }
         });
@@ -36,14 +38,33 @@ export class Game {
         this.mut_interval = 600; //ms
     }
 
-    async load() {
+    async load(filename) {
+        console.log(`load called`);
+        const response = await fetch(filename + '.JSON');
+        const data = await response.json();
+
+        // clear existing characters
+        this.characters = [];
+        this.pathfinding.enabled = false;
+        for (const character of data.npcs) {
+            this.characters.push(new NPC(character.name, {x:character.x, y:character.y}, this.ctx, this.pathfinding));
+        }
+
+        this.triggers = data.transitionZones || [];
+
+        this.player.cell = { x: data.playerStart.x, y: data.playerStart.y };
+        this.player.transform.SetPosition(this.player.cell.x * 16, this.player.cell.y * 16);
+        this.player.setTransitionZones(data.transitionZones);
+
         await Promise.all([
             this.tilemap.load('./tilemap.png'),
-            this.tilemap.load_map('./map.tmx', this.modules),
+            this.tilemap.load_map(filename + '.tmx', this.modules),
             this.player.load('./character.png'),
             ...this.characters.map(c => c.load('./character.png')),
         ]);
+        this.pathfinding.enabled = true;
     }
+
 
     tryInteract() {
         console.log(`hello world`);

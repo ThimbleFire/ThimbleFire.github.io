@@ -1,9 +1,17 @@
 import { Character } from './character.js';
 
 export class Player extends Character {
-    constructor(name, cell, ctx, input, pathfinding) {
+
+    invokable = 0;
+
+    constructor(name, cell, ctx, input, pathfinding, func) {
         super(name, cell, ctx, pathfinding)
         this.input = input
+        this.invokable = func;
+    }
+
+    setTransitionZones(triggers) {
+        this.transitionZones = triggers;
     }
 
     update(delta) {
@@ -33,6 +41,15 @@ export class Player extends Character {
         this.cell = this.chain[0].cell;
         this.transform.position = this.chain[0].position;
         this.chain.shift();
+
+        for (const trig of this.transitionZones) {
+            if (this.cell.x >= trig.x &&
+                this.cell.x < trig.x + trig.w &&
+                this.cell.y >= trig.y &&
+                this.cell.y < trig.y + trig.h) {
+                this.invokable(trig.targetMap);
+            }
+        }
     }
 
     _on_destination_reached() {

@@ -19,6 +19,7 @@ export class Pathfinding {
         this.nodes = [];
         this.width = 0;
         this.height = 0;
+        this.enabled = true;
     }
 
     getNode(cell) {
@@ -87,6 +88,10 @@ export class Pathfinding {
     }
 
     buildPath(start, goal, mode) {
+        // this prevents npcs from calculating paths before the pathfinder has been given a new grid
+        if (this.enabled == false) {
+            return [];
+        }
         // Reset nodes
         for (let row of this.nodes) {
             for (let node of row) {

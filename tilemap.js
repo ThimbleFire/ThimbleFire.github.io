@@ -8,8 +8,6 @@ export class TileMap {
         this.ctx = ctx;
         this.pathfinding = pathfinding;
         this.image = new Image();
-        this.tileSize = 16;
-        this.columns = 32;
     }
 
     async load(src) {
@@ -40,7 +38,7 @@ export class TileMap {
             if (name === "Blocked") {
                 this.pathfinding.width = this.columns;
                 this.pathfinding.height = this.rows;
-
+                this.pathfinding.nodes = [];
                 this.pathfinding.nodes = Array.from({ length: this.rows }, (_, y) =>
                     Array.from({ length: this.columns }, (_, x) => {
                         const tileId = grid[y * this.columns + x];
