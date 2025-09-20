@@ -4,6 +4,7 @@ import { AnimatedSceneObject }   from './sceneobject-animated.js';
 export class Character extends AnimatedSceneObject {
     constructor(name, cell, ctx, pathfinding) {
         super(cell, ctx, 'walkDown', 150);
+        this.name = name;
         this.transform.SetPosition(cell.x * 16, cell.y * 16);
         this.transform.SetSize(16, 16);
         this.renderRect.SetSize(16, 16);
@@ -16,6 +17,10 @@ export class Character extends AnimatedSceneObject {
         this.chain = [];
         this.direction = { x: 0, y: 0 };
         this.lastDirection = { x: 0, y: 0 };
+
+        this.bladder = 0.5;
+        this.stomach = 0.25;
+        this.thirst = 0.315;
 
         const animations = {
             walkDown: [
@@ -49,7 +54,7 @@ export class Character extends AnimatedSceneObject {
     update(delta) {
         if (this.chain.length === 0) {
             this._on_destination_reached();
-            this.direction = { x: 0, y: 0 };
+            //this.direction = { x: 0, y: 0 };
         }
         else
         {
@@ -64,7 +69,7 @@ export class Character extends AnimatedSceneObject {
         }
         super.update(delta);
         this.updateAnimation(delta);
-        this.direction = { x: 0, y: 0 };
+        //this.direction = { x: 0, y: 0 };
     }
 
     _on_tile_changed() {
@@ -84,10 +89,10 @@ export class Character extends AnimatedSceneObject {
 
         // Only change animation if something meaningful changed
         const newAnim = (this.moving ? "walk" : "idle") + 
-            (facing.y === 1 ? "Down" : 
-            facing.y === -1 ? "Up" : 
-            facing.x === 1 ? "Right" : 
-            facing.x === -1 ? "Left" : "Down");
+            (facing.y ===  1 ? "Down"   : 
+             facing.y === -1 ? "Up"     : 
+             facing.x ===  1 ? "Right"  : 
+             facing.x === -1 ? "Left"   : "Down");
 
         if (newAnim !== this.currentAnimation) {
             this.setAnimation(newAnim);

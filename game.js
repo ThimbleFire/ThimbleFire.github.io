@@ -20,10 +20,20 @@ export class Game {
         ];
         this.input = new Input();
         this.player = new Player("Tony", {x:6, y:5}, this.ctx, this.input, this.pathfinding);
+        this.input.onKey("e", "down", () => {
+            // get the cell 1 tile infront of the player character
+            const cellInFrontOfPlayer = { x: this.player.cell.x + this.player.lastDirection.x, y: this.player.cell.y + this.player.lastDirection.y};
+            // search for modules in that tile
+            for (const module of this.modules) {
+                if (module.cell.x == cellInFrontOfPlayer.x && module.cell.y == cellInFrontOfPlayer.y) {
+                    module.subscribe(this.player);
+                }
+            }
+        });
     
         // module update timer
-        this.mut_time = 0.0
-        this.mut_interval = 0.6;
+        this.mut_time = 0.0;
+        this.mut_interval = 600; //ms
     }
 
     async load() {
@@ -33,6 +43,10 @@ export class Game {
             this.player.load('./character.png'),
             ...this.characters.map(c => c.load('./character.png')),
         ]);
+    }
+
+    tryInteract() {
+        console.log(`hello world`);
     }
 
     start() {

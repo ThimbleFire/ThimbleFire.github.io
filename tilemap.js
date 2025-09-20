@@ -1,6 +1,7 @@
-import { MSink } from './modules/m-sink.js'
-import { MShower } from './modules/m-shower.js';
-import { NodePF } from './pathfinding.js';
+import { MSink }    from './modules/m-sink.js'
+import { MFridge }  from './modules/m-fridge.js';
+import { MToilet }  from './modules/m-toilet.js';
+import { NodePF }   from './pathfinding.js';
 
 export class TileMap {
     constructor(ctx, pathfinding) {
@@ -48,8 +49,9 @@ export class TileMap {
 
                         // Populate modules if tile ID corresponds to a module
                         const mod = this.getModuleType(tileId, cell);
-                        if (mod) modules.push(mod);
-
+                        if (mod) { 
+                            modules.push(mod);
+                        }
                         return new NodePF(cell, walkable);
                     })
                 );
@@ -59,8 +61,9 @@ export class TileMap {
 
     getModuleType(id, cell) {
         const moduleMap = {
-            21: MSink,
-            22: MShower
+            19: MSink,
+            39: MFridge,
+            21: MToilet,
         };
         const ModuleClass = moduleMap[id];
         return ModuleClass ? new ModuleClass(cell) : null;

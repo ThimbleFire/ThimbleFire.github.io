@@ -29,10 +29,6 @@ export class Player extends Character {
         super.update(delta);
     }
 
-    tryInteract() {
-        console.log(`hello world`);
-    }
-
     _on_tile_changed() {
         this.cell = this.chain[0].cell;
         this.transform.position = this.chain[0].position;
