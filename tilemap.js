@@ -1,7 +1,11 @@
+import { MSink } from './modules/m-sink.js'
+import { MShower } from './modules/m-shower.js';
+import { NodePF } from './pathfinding.js';
+
 export class TileMap {
     constructor(ctx, pathfinding) {
         this.ctx = ctx;
-        this.pathfinding = pathfinding
+        this.pathfinding = pathfinding;
         this.image = new Image();
         this.tileSize = 16;
         this.columns = 32;
@@ -14,7 +18,7 @@ export class TileMap {
         });
     }
 
-    async load_map(url) {
+    async load_map(url, modules) {
         const response = await fetch(url);
         const text = await response.text();
         const parser = new DOMParser();
@@ -25,19 +29,41 @@ export class TileMap {
         this.columns = parseInt(map.getAttribute("width"));
         this.rows = parseInt(map.getAttribute("height"));
 
-        const tileset = xml.querySelector("tileset image");
-
         this.layers = [];
         xml.querySelectorAll("layer").forEach(layer => {
             const data = layer.querySelector("data").textContent.trim();
             const name = layer.getAttribute("name");
             const grid = data.split(",").map(n => parseInt(n));
             this.layers.push(grid);
-            if(name == "Blocked")
-            {
-                this.pathfinding.setup(grid, this.columns, this.rows);
+
+            if (name === "Blocked") {
+                this.pathfinding.width = this.columns;
+                this.pathfinding.height = this.rows;
+
+                this.pathfinding.nodes = Array.from({ length: this.rows }, (_, y) =>
+                    Array.from({ length: this.columns }, (_, x) => {
+                        const tileId = grid[y * this.columns + x];
+                        const walkable = tileId === 0;
+                        const cell = { x, y };
+
+                        // Populate modules if tile ID corresponds to a module
+                        const mod = this.getModuleType(tileId, cell);
+                        if (mod) modules.push(mod);
+
+                        return new NodePF(cell, walkable);
+                    })
+                );
             }
         });
+    }
+
+    getModuleType(id, cell) {
+        const moduleMap = {
+            21: MSink,
+            22: MShower
+        };
+        const ModuleClass = moduleMap[id];
+        return ModuleClass ? new ModuleClass(cell) : null;
     }
 
     draw() {

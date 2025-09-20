@@ -1,33 +1,23 @@
 import { Pathfinding } from './pathfinding.js';
-import { SceneObject }   from './sceneobject.js';
+import { AnimatedSceneObject }   from './sceneobject-animated.js';
 
-export class Character extends SceneObject {
+export class Character extends AnimatedSceneObject {
     constructor(name, cell, ctx, pathfinding) {
-        super();
+        super(cell, ctx, 'walkDown', 150);
         this.transform.SetPosition(cell.x * 16, cell.y * 16);
         this.transform.SetSize(16, 16);
-        this.name = name;
-        this.cell = cell;
-        this.ctx = ctx;
+        this.renderRect.SetSize(16, 16);
+        this.renderRect.SetPosition(16, 0);
+
         this.pathfinding = pathfinding;
 
-        this.image = new Image();
-        this.frameWidth = 16;
-        this.frameHeight = 16;
-        this.currentAnimation = 'walkDown';
-        this.frameIndex = 0;
-        this.frameTime = 0.0;        
-        this.frameDuration = 150; // milliseconds per frame
         this.movement_speed = 40;
         this.moving = false;
-
         this.chain = [];
-
-
         this.direction = { x: 0, y: 0 };
         this.lastDirection = { x: 0, y: 0 };
 
-        this.animations = {
+        const animations = {
             walkDown: [
                 { x: 0, y: 0 },
                 { x: 16, y: 0 },
@@ -53,42 +43,28 @@ export class Character extends SceneObject {
             idleLeft: [ { x: 96, y: 0 } ],
             idleUp: [ { x: 64, y: 0 } ]
         };
-    }
-
-    async load(src) {
-        return new Promise(resolve => {
-            this.image.onload = resolve;
-            this.image.src = src;
-        });
-    }
-
-    setAnimation(name) {
-        if (this.currentAnimation !== name) {
-            this.currentAnimation = name;
-            this.frameIndex = 0;
-            this.frameTime = 0;
-        }
+        super.setAnimationData(animations);
     }
     
     update(delta) {
-        this.update_animation(delta);
-        this.direction = { x: 0, y: 0 };
         if (this.chain.length === 0) {
             this._on_destination_reached();
+            this.direction = { x: 0, y: 0 };
         }
         else
         {
             this.remainingDistance = this.transform.MoveToward(this.chain[0].position, delta, this.movement_speed);
-                
             this.direction = { 
                 x: this.chain[0].cell.x - this.cell.x, 
                 y: this.chain[0].cell.y - this.cell.y
             };
-        
             if (this.remainingDistance <= .64) {
                 this._on_tile_changed();
             }
         }
+        super.update(delta);
+        this.updateAnimation(delta);
+        this.direction = { x: 0, y: 0 };
     }
 
     _on_tile_changed() {
@@ -99,44 +75,27 @@ export class Character extends SceneObject {
         
     }
 
-    update_animation(delta) {
-        if(this.direction != this.lastDirection)
-        {
-            this.lastDirection = this.direction;
-            if (this.direction.y == 1) {
-                this.setAnimation(this.moving ? "walkDown" : "idleDown");
-            }
-            if (this.direction.y == -1) {
-                this.setAnimation(this.moving ? "walkUp" : "idleUp");
-            }
-            if (this.direction.x == -1) {
-                this.setAnimation(this.moving ? "walkLeft" : "idleLeft");
-            }
-            if (this.direction.x == 1) {
-                this.setAnimation(this.moving ? "walkRight" : "idleRight");
-            }
-        }
-
-        // Cycle animation frames based on time
-        this.frameTime += delta;
-        const frames = this.animations[this.currentAnimation];
+    updateAnimation(delta) {
         
-        if (this.frameTime >= this.frameDuration) {
-            this.frameTime = 0;
-            this.frameIndex = (this.frameIndex + 1) % frames.length;
-        }
-    }
+        // Pick facing direction (stick to lastDirection if standing still)
+        let facing = (this.direction.x !== 0 || this.direction.y !== 0) 
+            ? this.direction 
+            : this.lastDirection;
 
-    draw() {
-        const frames = this.animations[this.currentAnimation];
-        const frame = frames[this.frameIndex];
-    
-        this.ctx.drawImage(
-            this.image,
-            frame.x, frame.y,           // Source x/y
-            this.frameWidth, this.frameHeight,
-            this.transform.position.x, this.transform.position.y,             // Destination x/y
-            this.frameWidth, this.frameHeight
-        );
+        // Only change animation if something meaningful changed
+        const newAnim = (this.moving ? "walk" : "idle") + 
+            (facing.y === 1 ? "Down" : 
+            facing.y === -1 ? "Up" : 
+            facing.x === 1 ? "Right" : 
+            facing.x === -1 ? "Left" : "Down");
+
+        if (newAnim !== this.currentAnimation) {
+            this.setAnimation(newAnim);
+        }
+
+        // Remember last non-zero direction
+        if (this.direction.x !== 0 || this.direction.y !== 0) {
+            this.lastDirection = this.direction;
+        }
     }
 }

@@ -7,11 +7,9 @@ export class Player extends Character {
     }
 
     update(delta) {
-
-        if (this.moving == false)
-        {
+        if (this.moving == false) {
             this.direction = this.input.movementVector;
-
+            this.moving = false;
             if (this.direction.x !== 0 || this.direction.y !== 0) {
                 const target = this.pathfinding.getNode({
                     x: this.cell.x + this.direction.x,
@@ -23,7 +21,6 @@ export class Player extends Character {
                     if (path.length > 0) {
                         this.moving = true;
                         this.chain = path.slice();
-                        console.log(`${this.chain.length}`);
                     }
                 }
             }
@@ -32,6 +29,9 @@ export class Player extends Character {
         super.update(delta);
     }
 
+    tryInteract() {
+        console.log(`hello world`);
+    }
 
     _on_tile_changed() {
         this.cell = this.chain[0].cell;

@@ -1,6 +1,6 @@
 import { NPC } from './npc.js';
 import { TileMap } from './tilemap.js';
-import { Input } from './InputListener.js';
+import { Input } from './input-listener.js';
 import { Player } from './player.js';
 import { Pathfinding } from './pathfinding.js';
 
@@ -12,19 +12,24 @@ export class Game {
         this.lastTimestamp = performance.now();
         
         this.pathfinding = new Pathfinding();
+        this.modules = [];
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
         this.characters = [
-            new NPC("Blaze", {x:5, y:7}, this.ctx, this.pathfinding),
-            new NPC("Frost", {x:4, y:7}, this.ctx, this.pathfinding)
+            new NPC("Blaze", {x:5, y:6}, this.ctx, this.pathfinding),
+            new NPC("Frost", {x:6, y:7}, this.ctx, this.pathfinding)
         ];
         this.input = new Input();
-        this.player = new Player("Tony", {x:6, y:8}, this.ctx, this.input, this.pathfinding);
+        this.player = new Player("Tony", {x:6, y:5}, this.ctx, this.input, this.pathfinding);
+    
+        // module update timer
+        this.mut_time = 0.0
+        this.mut_interval = 0.6;
     }
 
     async load() {
         await Promise.all([
             this.tilemap.load('./tilemap.png'),
-            this.tilemap.load_map('./map.tmx'),
+            this.tilemap.load_map('./map.tmx', this.modules),
             this.player.load('./character.png'),
             ...this.characters.map(c => c.load('./character.png')),
         ]);
@@ -45,6 +50,16 @@ export class Game {
     }
 
     update(delta) {
+        // module update timer
+        this.mut_time += delta;
+        if (this.mut_time >= this.mut_interval) {
+            this.mut_time -= this.mut_interval;
+            for (const module of this.modules) {
+                module.tick();
+            }
+        }
+
+        // update entities
         for (const character of this.characters) {
             character.update(delta); // animation, movement, etc.
         }

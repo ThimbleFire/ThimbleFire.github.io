@@ -21,19 +21,6 @@ export class Pathfinding {
         this.height = 0;
     }
 
-    setup(data, width, height) {
-        this.width = width;
-        this.height = height;
-        this.nodes = Array.from({ length: height }, (_, y) =>
-            Array.from({ length: width }, (_, x) => {
-                let walkable = data[y * width + x] === 0;
-                let cell = { x, y };
-                let pos = { x: x * 16, y: y * 16 };
-                return new NodePF(cell, walkable);
-            })
-        );
-    }
-
     getNode(cell) {
         if (
             cell.x < 0 || cell.x >= this.width ||
