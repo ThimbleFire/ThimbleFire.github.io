@@ -27,6 +27,9 @@ export class TileMap {
         this.tileSize = parseInt(map.getAttribute("tilewidth"));
         this.columns = parseInt(map.getAttribute("width"));
         this.rows = parseInt(map.getAttribute("height"));
+        
+        // clear existing modules
+        modules.length = 0;
 
         this.layers = [];
         xml.querySelectorAll("layer").forEach(layer => {

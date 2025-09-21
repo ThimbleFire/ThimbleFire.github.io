@@ -44,7 +44,7 @@ export class Game {
         const data = await response.json();
 
         // clear existing characters
-        this.characters = [];
+        this.characters.length = 0;
         this.pathfinding.enabled = false;
         for (const character of data.npcs) {
             this.characters.push(new NPC(character.name, {x:character.x, y:character.y}, this.ctx, this.pathfinding));
