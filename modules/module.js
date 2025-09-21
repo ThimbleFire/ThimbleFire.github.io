@@ -10,6 +10,10 @@ export class Module extends Transform {
         this.flags = new Set();
     }
 
+    getApplicableCells() {
+        return [ cell ];
+    }
+
     subscribe(character) {
         if (this.subscribers.has(character))
             return;
