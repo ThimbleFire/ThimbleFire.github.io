@@ -24,11 +24,13 @@ export class Game {
                 x: this.player.cell.x + this.player.lastDirection.x, 
                 y: this.player.cell.y + this.player.lastDirection.y
             };
-            // search for modules in that tile
+            //  change this to module. 
             for (const module of this.modules) {
-                if (module.cell.x == cellInFrontOfPlayer.x && module.cell.y == cellInFrontOfPlayer.y) {
-                    module.subscribe(this.player);
-                    return
+                for (const cell of module.getApplicableCells()) {
+                    if (cell.x == cellInFrontOfPlayer.x && cell.y == cellInFrontOfPlayer.y) {
+                        module.subscribe(this.player);
+                        return
+                    }
                 }
             }
         });
