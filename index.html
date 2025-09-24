@@ -40,11 +40,13 @@
       padding: 20px;
       overflow-y: auto;
       background-color: #222;
+      width: clamp(641px, 80vw, 1282px); /* scales between 50% and 100% of logo width */
     }
-
+    
     .logo {
-      width: calc(100vw - 512px); /* Full viewport width minus both side panels */
-      height: 150px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1282 / 399;
       padding: 10px;
       background-image: url('image.png');
       background-repeat: no-repeat;
@@ -52,6 +54,7 @@
       background-size: contain;
       margin-bottom: 20px;
     }
+
     
     nav {
       display: flex;
