@@ -43,15 +43,16 @@
     }
 
     .logo {
-      width: 100%;
+      width: calc(100vw - 512px); /* Full viewport width minus both side panels */
       height: 150px;
-      background-image: url('image.png'); /* Replace with your logo */
+      padding: 10px;
+      background-image: url('image.png');
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
       margin-bottom: 20px;
     }
-
+    
     nav {
       display: flex;
       gap: 15px;
