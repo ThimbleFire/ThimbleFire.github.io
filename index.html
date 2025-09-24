@@ -71,6 +71,20 @@
         margin-left: 20px;
         list-style-type: square;
     }
+
+    details summary {
+      cursor: pointer;
+      background-color: #333;
+      padding: 10px;
+      border: 1px solid #555;
+      color: #eee;
+      font-size: 18px;
+    }
+    
+    details[open] summary {
+      background-color: #444;
+    }
+
     
   </style>
 </head>
@@ -99,7 +113,8 @@
   <script>
     const pages = {
     home: `<h2>Patch Notes</h2>
-        <p><b>0.71</b></p>
+        <details open>
+        <summary><b>0.7.1</b></summary>
         <ul>
           <li>Added items to foraging:
             <ul>
@@ -114,11 +129,10 @@
               <li>Added fishing rod</li>
             </ul>
         </ul>
-        
-        <p>Fishing functionality has not yet been added.<br>
-        There's no way to obtain string which is used in crafting the fishing rod or bow. I should probably get on that.</p>
-        
-        <p><b>0.7</b></p>
+        </details>
+         
+        <details open>
+        <summary><b>0.7</b></summary>
         <ul>
           <li>Added character creation window</li>
           <li>Added short, long, balding, bald hair styles</li>
@@ -128,53 +142,63 @@
           <li>Added archery</li>
           <li>Added fishing rod</li>
         </ul>
-        
-        <p><b>0.61</b></p>
+        </details>
+         
+        <details open>
+        <summary><b>0.6.1</b></summary>
         <ul>
           <li>Added world map</li>
         </ul>
-        <p>You can now tap 'm' (default) to open the world map.<br>
-        Be aware that you'll have to determine your whereabouts, and there's currently no method of tagging points on the map.</p>
-        
-        <p><b>0.6</b></p>
+        <p>You can now tap 'm' (default) to open the world map.<br>    
+        </details>
+         
+        <details open>
+        <summary><b>0.6</b></summary>
         <ul>
           <li>Added cliffs</li>
-        </ul>
-        <p>Cliffs act as natural movement collision barriers. They won't prevent projectiles.</p>
-        
-        <p><b>0.5.1</b></p>
+        </ul>      
+        </details>
+         
+        <details open>
+        <summary><b>0.5.1</b></summary>
         <ul>
           <li>Added crafting recipes</li>
           <li>Added crafting window</li>
         </ul>
         <p>Tap 'n' (default) to open the crafting window.<br>
-        Crafting requires two or more items. Some items will be removed in exchange for the finished product and other items will facilitate in the crafting.<br>
-        Recipes will offer a variety of items that can be used to make a product. For example, a bone saw and an iron saw are equally capable of turning logs into planks.</p>
-        
-        <p><b>0.5</b></p>
+        </details>
+         
+        <details open>
+        <summary><b>0.5</b></summary>
         <ul>
           <li>Added item pick-up and drop behaviour</li>
         </ul>
-        <p>You can now pick up and drop items on the ground. Items will retain their location and be present when you return at a later date.<br>
-        Other players will be able to see items on the ground immediately.</p>
-        
-        <p><b>0.4</b></p>
+        </details>
+         
+        <details open>
+        <summary><b>0.4</b></summary>
         <ul>
           <li>Added equip behaviour</li>
-        </ul>
-        
-        <p><b>0.3</b></p>
+        </ul>        
+        </details>
+         
+        <details open>
+        <summary><b>0.3</b></summary>
         <ul>
           <li>Added multiplayer TCP account creation, login, general multiplayer behaviour</li>
           <li>Added server-side world generation</li>
-        </ul>
-        
-        <p><b>0.2</b></p>
+        </ul>        
+        </details>
+         
+        <details open>
+        <summary><b>0.2</b></summary>
         <ul>
           <li>Added moving around, pathfinding, chunk loading, all that good stuff</li>
-        </ul>
-        
-        <p><b>0.1</b></p>
+        </ul>        
+        </details>
+         
+        <details open>
+        <summary><b>0.1</b></summary>
         <ul>
           <li>imported assets and setup player character animations, made an input device and event distributor</li>
         </ul>`,
