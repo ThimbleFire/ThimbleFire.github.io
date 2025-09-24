@@ -9,10 +9,6 @@
       font-family: 'Retro Gaming';
       src: url('Retro Gaming.ttf') format('truetype');
     }
-
-    b, strong {
-      font-family: 'Retro Gaming', sans-serif;
-    }
     
     body {
       margin: 0;
@@ -21,7 +17,12 @@
       color: #eee;
       display: flex;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: scroll; /* allow vertical scrolling */
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    body::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
     }
 
     .side {
@@ -87,7 +88,8 @@
       padding: 10px;
       border: 1px solid #555;
       color: #eee;
-      font-size: 18px;
+      font-family: 'Retro Gaming', sans-serif;
+      font-size: 11px;
     }
     
     details[open] summary {
