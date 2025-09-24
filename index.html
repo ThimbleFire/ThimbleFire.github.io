@@ -17,7 +17,7 @@
       color: #eee;
       display: flex;
       height: 100vh;
-      overflow-y: scroll; /* allow vertical scrolling */
+      /*overflow-y: scroll; /* allow vertical scrolling */
       scrollbar-width: none; /* Firefox */
     }
     
@@ -40,13 +40,12 @@
       padding: 20px;
       overflow-y: auto;
       background-color: #222;
-      width: clamp(641px, 80vw, 1282px); /* scales between 50% and 100% of logo width */
+      width: 512px; /* scales between 50% and 100% of logo width */
     }
     
     .logo {
       width: 100%;
       height: auto;
-      aspect-ratio: 1282 / 399;
       padding: 10px;
       background-image: url('image.png');
       background-repeat: no-repeat;
