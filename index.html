@@ -160,18 +160,39 @@
         
         <p><b>0.4</b></p>
         <ul>
-          <li>Added</li>
+          <li>Added equip behaviour</li>
+        </ul>
+        
+        <p><b>0.3</b></p>
+        <ul>
+          <li>Added multiplayer TCP account creation, login, general multiplayer behaviour</li>
+          <li>Added server-side world generation</li>
+        </ul>
+        
+        <p><b>0.2</b></p>
+        <ul>
+          <li>Added moving around, pathfinding, chunk loading, all that good stuff</li>
+        </ul>
+        
+        <p><b>0.1</b></p>
+        <ul>
+          <li>imported assets and setup player character animations, made an input device and event distributor</li>
         </ul>`,
     
-      download: `<h2>Download</h2><p>Get the latest version of the game here. Compatible with Windows, macOS, and Linux.</p>`,
-      about: `<h2>About</h2><p>This game is a passion project inspired by classic RPGs and pixel art worlds.</p>`,
-      wiki: `<h2>Wiki</h2><p>Learn about characters, lore, mechanics, and more in our community-driven wiki.</p>`,
-      support: `<h2>Support</h2><p>Need help? Contact us or visit the forums for assistance.</p>`
+      download: `<h2>Download</h2><p>It's not out yet but it'll be available for Windows and Linux. I don't have any plans to ever release this game for MacOS.</p>`,
+      about: `<h2>About</h2><p>Generic survival sandbox. </br>Forage, craft, explore, build, gather, manufacture, trade, claim, expand, make alliances, wage wars, conquer.</p>
+      <p>Reldawin is permadeath. Permadeath can be bullshit. To make it not suck items are common and recipes don't ask for much. But make no mistake, your skills and equipment condition will massively improve your odds at surviving winters, wars and wilderness.`,
+      wiki: `<h2>Wiki</h2><p>I am the kind of loser who writes a wiki for their own game so, give me a while, I'll put one together a little before 1.0 drops.</p>`,
+      support: `<h2>Support</h2><p>Found a bug? Want to sue? Email me at Lojith@Reldawin.com.</p>`
     };
-
+    
     function showPage(page) {
       document.getElementById('page-content').innerHTML = pages[page];
     }
+
+    window.onload = function() {
+        showPage('home');
+    };
   </script>
 </body>
 </html>
