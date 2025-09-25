@@ -2,8 +2,7 @@ name: Build manifest
 
 on:
   push:
-    paths:
-      - 'patchnotes/*.json'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
