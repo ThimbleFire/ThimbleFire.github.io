@@ -1,0 +1,4 @@
+{ "patches": [
+  "manifest.json",
+  "0.8.json"
+]}
