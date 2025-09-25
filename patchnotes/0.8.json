@@ -1,0 +1,22 @@
+{
+  "version": "0.8 (in development)",
+  "sections": [
+    {
+      "title": "Features",
+      "items": [
+        "16 degrees of rotation",
+        "Auto-run. Tap 'v' (default) to toggle.",
+        "New equipment sprite art",
+        "Gardening (planting, growing)"
+      ]
+    },
+    {
+      "title": "New Recipes",
+      "items": [
+        "Wooden house",
+        "Wooden chest",
+        "Rake"
+      ]
+    }
+  ]
+}

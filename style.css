@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Retro Gaming';
+    src: url('Retro Gaming.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    background-color: #111;
+    color: #eee;
+    display: flex;
+    height: 100vh;
+}
+
+h2 {
+    color: #ffbf36;
+    padding-left: 20px;
+}
+
+h1 {
+    color: #909089;
+}
+
+.content::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.side {
+    width: 20%;
+    background-image: url('ckbLmsT.png');
+    background-repeat: repeat-y;
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    .side { display: none; } /* hide sides on mobile */
+    .content { width: 100%; }
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #222;
+    width: 60%;
+    scrollbar-width: none;
+}
+
+.logo {
+    max-width: 100%;
+    margin: 10 auto;
+    background-image: url('image.png');
+    background-position: center;
+    background-size: contain;
+    aspect-ratio: 1072 / 399; /* maintain original proportions */
+}
+
+nav {
+    text-align: center;
+}
+
+nav button {
+    background-color: #444;
+    color: #eee;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+nav button:hover {
+    background-color: #666;
+}
+
+ul ul {
+    margin-left: 20px;
+    list-style-type: square;
+}
+
+details summary {
+    cursor: pointer;
+    background-color: #333;
+    padding: 10px;
+    border: 1px solid #555;
+    color: #eee;
+    font-family: 'Retro Gaming', sans-serif;
+    font-size: 11px;
+}
+
+details[open] summary {
+    background-color: #444;
+}

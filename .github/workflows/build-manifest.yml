@@ -1,0 +1,28 @@
+name: Build manifest
+
+on:
+  push:
+    paths:
+      - 'patchnotes/*.json'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate manifest.json
+        run: |
+          echo '{ "patches": [' > patchnotes/manifest.json
+          for f in $(ls -1 patchnotes/*.json | sort -r); do
+            echo "  \"$(basename $f)\"," >> patchnotes/manifest.json
+          done
+          sed -i '$ s/,$//' patchnotes/manifest.json
+          echo ']}' >> patchnotes/manifest.json
+      - name: Commit and push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add patchnotes/manifest.json
+          git commit -m "Update manifest.json"
+          git push

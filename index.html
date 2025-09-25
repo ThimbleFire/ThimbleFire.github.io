@@ -3,245 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Reldawin</title>
-  <style>
-    @font-face {
-      font-family: 'Retro Gaming';
-      src: url('Retro Gaming.ttf') format('truetype');
-    }
-    
-    body {
-      margin: 0;
-      font-family: 'Verdana', sans-serif;
-      background-color: #111;
-      color: #eee;
-      display: flex;
-      height: 100vh;
-      scrollbar-width: none; /* Firefox */
-    }
-
-    .content::webkit-scrollbar {
-      width: 0px;
-      background: transparent; /* Chrome, Safari, Edge */
-    }
-
-    .side {
-      width: 20%;
-      background-image: url('ckbLmsT.png'); /* Replace with your image */
-      background-repeat: repeat-y;
-      background-size: cover;
-    }
-
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: left;
-      padding: 20px;
-      overflow-y: auto;
-      background-color: #222;
-      width: 60%;
-      scrollbar-width: none; /* Firefox */
-    }
-    
-    .logo {
-      width: 60vw; /* 60% of the viewport width */
-      padding-left: 20px;
-      padding-right: 20px;
-      margin-bottom: 20px;
-      background-image: url('image.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      aspect-ratio: 1282 / 399; /* maintain original proportions */
-    }
-
-    nav button {
-      background-color: #444;
-      color: #eee;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    nav button:hover {
-      background-color: #666;
-    }
-
-    ul ul {
-        margin-left: 20px;
-        list-style-type: square;
-    }
-
-    details summary {
-      cursor: pointer;
-      background-color: #333;
-      padding: 10px;
-      border: 1px solid #555;
-      color: #eee;
-      font-family: 'Retro Gaming', sans-serif;
-      font-size: 11px;
-    }
-    
-    details[open] summary {
-      background-color: #444;
-    }
-
-    
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="side"></div>
-
   <div class="content">
     <div class="logo"></div>
-
-    <nav><center>
+    <nav>
       <button onclick="showPage('home')">Home</button>
       <button onclick="showPage('download')">Download</button>
       <button onclick="showPage('about')">About</button>
       <button onclick="window.open('https://github.com/ThimbleFire/Reldawin_Wiki/wiki', '_blank')">Wiki</button>
       <button onclick="showPage('support')">Support</button>
-    </center></nav>
-
+    </nav>
     <div class="page" id="page-content">
       <h2>I don't take this seriously</h2>
       <p>It is what it is.</p>
     </div>
   </div>
-
   <div class="side"></div>
-
-  <script>
-    const pages = {
-    home: `<p>Got a bit of a rework going on at the moment so it'll be a few months before 0.8.</br>Lots of redesigns, 16 degrees of rotation, construction and instanced play-areas (such as inside buildings).</br></br></br><center>---</center></br></br></br></p><h2>Patch Notes</h2>
-
-      <details open>
-        <summary><b>0.8 (in development)</b></summary>
-        <ul>
-          <li>Added 16 degrees of rotation</li>
-          <li>Added auto-run. Tap 'v' (default) to toggle.</li>
-          <li>New equipment sprite art</li>
-          <li>Added crafting recipes:
-            <ul>
-              <li>Wooden house</li>
-              <li>Wooden chest</li>
-              <li>Rake</li>
-            </ul>
-          <li>Gardening (planting, growing) functionality added</li>
-        </ul>
-        </details>
-    
-        <details>
-        <summary><b>0.7.1</b></summary>
-        <ul>
-          <li>Added items to foraging:
-            <ul>
-              <li>Cotton</li>
-            </ul>
-          <li>Added crafting recipes:
-            <ul>
-              <li>Added string</li>
-              <li>Added bow</li>
-              <li>Added fishing rod</li>
-            </ul>
-        </ul>
-        </details>
-         
-        <details>
-        <summary><b>0.7</b></summary>
-        <ul>
-          <li>Added character creation window</li>
-          <li>Added short, long, balding, bald hair styles</li>
-          <li>Added ability to dye hair colour</li>
-          <li>Redesigned character sprites (models) and animations</li>
-          <li>Removed gloves, boots having visual impact on player's appearance</li>
-          <li>Added archery</li>
-          <li>Added fishing rod</li>
-        </ul>
-        </details>
-         
-        <details>
-        <summary><b>0.6.1</b></summary>
-        <ul>
-          <li>Added world map</li>
-        </ul>
-        <p>You can now tap 'm' (default) to open the world map.<br>    
-        </details>
-         
-        <details>
-        <summary><b>0.6</b></summary>
-        <ul>
-          <li>Added cliffs</li>
-        </ul>      
-        </details>
-         
-        <details>
-        <summary><b>0.5.1</b></summary>
-        <ul>
-          <li>Added crafting recipes</li>
-          <li>Added crafting window</li>
-        </ul>
-        <p>Tap 'n' (default) to open the crafting window.<br>
-        </details>
-         
-        <details>
-        <summary><b>0.5</b></summary>
-        <ul>
-          <li>Added item pick-up and drop behaviour</li>
-        </ul>
-        </details>
-         
-        <details>
-        <summary><b>0.4.1</b></summary>
-        <ul>
-          <li>Added equip behaviour</li>
-        </ul>        
-        </details>
-        
-        <details>
-        <summary><b>0.4</b></summary>
-        <ul>
-          <li>Added inventory and equipment windows</li>
-        </ul>       
-        <p>Tap 'i' and 'c' (default) to open the inventory and equipment windows.<br> 
-        </details>
-         
-        <details>
-        <summary><b>0.3</b></summary>
-        <ul>
-          <li>Added multiplayer TCP account creation, login, general multiplayer behaviour</li>
-          <li>Added server-side world generation</li>
-        </ul>        
-        </details>
-         
-        <details>
-        <summary><b>0.2</b></summary>
-        <ul>
-          <li>Added moving around, pathfinding, chunk loading, all that good stuff</li>
-        </ul>        
-        </details>
-         
-        <details>
-        <summary><b>0.1</b></summary>
-        <ul>
-          <li>imported assets and setup player character animations, made an input device and event distributor</li>
-        </ul>`,
-    
-      download: `<h2>Download</h2><p>It's not out yet but it'll be available for Windows and Linux. I don't have any plans to ever release this game for MacOS.</p>`,
-      about: `<h2>About</h2><p>Generic survival sandbox. </br>Forage, craft, explore, build, gather, manufacture, trade, claim, expand, make alliances, wage wars, conquer.</p>
-      <p>Reldawin is permadeath. Permadeath can be bullshit. To make it not suck items are common and recipes don't ask for much. But make no mistake, your skills and equipment condition will massively improve your odds at surviving winters, wars and wilderness.`,
-      wiki: ``,
-      support: `<h2>Support</h2><p>Found a bug? Want to sue? Email me at Lojith@Reldawin.com.</br>I don't use social media, so. No links to share.</p>`
-    };
-    
-    function showPage(page) {
-      document.getElementById('page-content').innerHTML = pages[page];
-    }
-
-    window.onload = function() {
-        showPage('home');
-    };
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
