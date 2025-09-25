@@ -2,8 +2,7 @@ name: Build manifest
 
 on:
   push:
-    paths:
-      - 'patchnotes/*.json'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -13,18 +12,20 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate manifest.json
         run: |
-          echo '{ "patches": [' > patchnotes/manifest.json
+          echo '{ "patches": [' > manifest.json
           for f in $(ls -1 patchnotes/*.json | sort -r); do
-            echo "  \"$(basename $f)\"," >> patchnotes/manifest.json
+            echo "  \"$(basename $f)\"," >> manifest.json
           done
-          sed -i '$ s/,$//' patchnotes/manifest.json
-          echo ']}' >> patchnotes/manifest.json
+          sed -i '$ s/,$//' manifest.json
+          echo ']}' >> manifest.json
       - name: Commit and push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add patchnotes/manifest.json
-          git commit -m "Update manifest.json"
+          git add manifest.json
+          git commit -m "Update manifest.json" || echo "No changes to commit"
           git push

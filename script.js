@@ -10,13 +10,14 @@ async function loadPatchNotes() {
   const container = document.getElementById('page-content');
   container.innerHTML = "<h1>Patch Notes</h1>";
 
-  const manifest = await fetch("patchnotes/manifest.json").then(r => r.json());
+  const manifest = await fetch("manifest.json").then(r => r.json());
 
   for (const file of manifest.patches) {
     const data = await fetch("patchnotes/" + file).then(r => r.json());
 
     const details = document.createElement("details");
     const summary = document.createElement("summary");
+    console.log(data);
     summary.innerHTML = `<b>${data.version}</b>`;
     details.appendChild(summary);
 
@@ -39,7 +40,12 @@ async function loadPatchNotes() {
 }
 
 function showPage(page) {
-    document.getElementById('page-content').innerHTML = pages[page];
+    if (page === "home") {
+        loadPatchNotes();
+    }
+    else {
+        document.getElementById('page-content').innerHTML = pages[page];
+    }
 }
 
 window.onload = function() {
