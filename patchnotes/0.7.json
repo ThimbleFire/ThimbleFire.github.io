@@ -9,7 +9,12 @@
                  "Removed gloves, boots from modifying player appearance",
                  "Added archery",
                  "Added fishing rod"
-        ]
+        ],
+      "images": ["images/archery_2025-08-06.gif",
+                "images/image.png",
+                "images/image2.png",
+                "images/mining_loop.gif",
+                "images/wc_loop.gif" ]
     }
   ]
 }

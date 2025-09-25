@@ -3,6 +3,7 @@
   "sections": [
     {
       "title": "",
+      "images": ["images/map_demo.png"],
       "items": [ "Added world map. Tap 'm' (default) to open the world map."
         ]
     }

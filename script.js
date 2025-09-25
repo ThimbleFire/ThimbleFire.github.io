@@ -24,6 +24,17 @@ async function loadPatchNotes() {
       h2.textContent = section.title;
       details.appendChild(h2);
 
+      if (Array.isArray(section.images)) {
+        for (const src of section.images) {
+          const img = document.createElement("img");
+          img.src = src;          // relative or absolute URL
+          img.style.maxWidth = "100%";      // responsive
+          img.style.margin = "10px auto";
+          img.style.paddingRight = "20px";
+          details.appendChild(img);
+        }
+      }
+
       const ul = document.createElement("ul");
       for (const item of section.items) {
         const li = document.createElement("li");

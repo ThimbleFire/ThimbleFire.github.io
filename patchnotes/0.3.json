@@ -3,8 +3,10 @@
   "sections": [
     {
       "title": "",
-      "items": [ "Added multiplayer TCP account creation, general multiplayer behaviour", "Added server-side world generation"
-        ]
+      "items": [ "Added multiplayer TCP account creation, general multiplayer behaviour", 
+      "Added server-side world generation"
+        ],
+      "images": ["images/gx1GjL4.mp4"]
     }
   ]
 }

@@ -3,6 +3,7 @@
   "sections": [
     {
       "title": "",
+      "images": ["images/crafting window.png"],
       "items": [ "Added crafting recipes", "Added crafting window"
         ]
     }
