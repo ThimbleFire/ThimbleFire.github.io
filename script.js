@@ -35,6 +35,19 @@ async function loadPatchNotes() {
         }
       }
 
+      if (section.vid) {
+        const video = document.createElement("video");
+        video.src = section.vid;
+        video.controls = true;
+        video.autoplay = false; // change to true if you want autoplay
+        video.loop = true;
+        video.muted = true;     // helps if you enable autoplay
+        video.style.display = "block";
+        video.style.margin = "20px auto";
+        video.style.maxWidth = "100%";
+        details.appendChild(video);
+      }
+
       const ul = document.createElement("ul");
       for (const item of section.items) {
         const li = document.createElement("li");
