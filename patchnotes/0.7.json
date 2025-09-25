@@ -1,0 +1,15 @@
+{
+  "version": "0.7",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "Character creation window",
+                 "Short, long, balding, bald, hair styles",
+                 "Players can now dye their colour",
+                 "Removed gloves, boots from modifying player appearance",
+                 "Added archery",
+                 "Added fishing rod"
+        ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "version": "0.3",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "Added multiplayer TCP account creation, general multiplayer behaviour", "Added server-side world generation"
+        ]
+    }
+  ]
+}

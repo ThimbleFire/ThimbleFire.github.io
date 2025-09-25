@@ -1,0 +1,10 @@
+{
+  "version": "0.4",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "Added inventory and equipment windows. Tap 'i' and 'c' (default) to open these windows"
+        ]
+    }
+  ]
+}

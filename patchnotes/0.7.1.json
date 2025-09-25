@@ -1,0 +1,17 @@
+{
+  "version": "0.7.1",
+  "sections": [
+    {
+      "title": "Foraging",
+      "items": [ "Cotton" ]
+    },
+    {
+      "title": "New recipes",
+      "items": [
+        "String",
+        "Bow",
+        "Fishing rod"
+      ]
+    }
+  ]
+}

@@ -14,10 +14,8 @@ async function loadPatchNotes() {
 
   for (const file of manifest.patches) {
     const data = await fetch("patchnotes/" + file).then(r => r.json());
-
     const details = document.createElement("details");
     const summary = document.createElement("summary");
-    console.log(data);
     summary.innerHTML = `<b>${data.version}</b>`;
     details.appendChild(summary);
 

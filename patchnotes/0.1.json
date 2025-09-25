@@ -1,0 +1,10 @@
+{
+  "version": "0.1",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "imported assets, setup player animations, made an input device and event distributor"
+        ]
+    }
+  ]
+}

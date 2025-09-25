@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "Added moving around, pathfinding, chunk loading, all that good stuff"
+        ]
+    }
+  ]
+}

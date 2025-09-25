@@ -1,0 +1,10 @@
+{
+  "version": "0.6.1",
+  "sections": [
+    {
+      "title": "",
+      "items": [ "Added world map. Tap 'm' (default) to open the world map."
+        ]
+    }
+  ]
+}
