@@ -3,6 +3,11 @@
     src: url('Retro Gaming.ttf') format('truetype');
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   margin: 0;
   font-family: 'Verdana', sans-serif;
@@ -10,7 +15,6 @@ body {
   color: #eee;
   display: flex;
   flex-direction: column; /* stack main and footer */
-  min-height: 100vh;
 }
 
 .main {
