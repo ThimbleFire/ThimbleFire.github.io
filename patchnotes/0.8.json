@@ -5,9 +5,11 @@
       "title": "Features",
       "items": [
         "16 degrees of rotation",
-        "Auto-run. Tap 'v' (default) to toggle.",
+        "Auto-run. Tap 'v' (default) to toggle",
         "New equipment sprite art",
-        "Gardening (planting, growing)"
+        "Gardening (planting, growing)",
+        "Can now move with WSAD. Tap 'e' (default) to interact with objects in the forward-facing direction, such as trees",
+        "Can cycle through items on ground by tapping 'tab' (default)"
       ]
     },
     {
