@@ -9,6 +9,8 @@ export class TileMap {
 
         this.columns = 32;
         this.rows = 32;
+        this.pathfinding.width = this.columns;
+        this.pathfinding.height = this.rows;
     }
 
     async load_map(originX = 0, originY = 0) {
