@@ -25,6 +25,8 @@ export class Player extends Character {
                 
                 if (target && target.walkable) {
                     const path = this.pathfinding.buildPath(this.cell, target.cell, 2);
+                    console.log(`path returned length > 0: ${path.length > 0 ? 'true' : 'false'}`);
+                    
                     if (path.length > 0) {
                         this.moving = true;
                         this.chain = path.slice();
