@@ -36,14 +36,10 @@ export class Game {
         this.mut_interval = 600; //ms
     }
 
-    async load(filename) {
+    async load() {
         this.npcs = [];
-
-        
-        
         this.player.cell = { x: 16, y: 16 };
         this.player.transform.SetPosition(this.player.cell.x * 16, this.player.cell.y * 16);
-
         await Promise.all([
             this.tilemap.load_map(this.player.cell.x, this.player.cell.y),
             this.player.load('./character.png'),
