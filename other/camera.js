@@ -18,8 +18,8 @@ export class Camera extends SceneObject {
 
     apply(ctx) {
         ctx.translate(
-            -this.transform.position.x,
-            -this.transform.position.y
+            -Math.floor(this.transform.position.x),
+            -Math.floor(this.transform.position.y)
         );
     }
 
