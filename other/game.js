@@ -39,11 +39,13 @@ export class Game {
     async load(filename) {
         this.npcs = [];
 
-        this.player.cell = { x: data.playerStart.x, y: data.playerStart.y };
+        
+        
+        this.player.cell = { x: 16, y: 16 };
         this.player.transform.SetPosition(this.player.cell.x * 16, this.player.cell.y * 16);
 
         await Promise.all([
-            this.tilemap.load_map(data.playerStart.x, data.playerStart.y),
+            this.tilemap.load_map(this.player.cell.x, this.player.cell.y),
             this.player.load('./character.png'),
             ...this.npcs.map(c => c.load('./character.png')),
         ]);
