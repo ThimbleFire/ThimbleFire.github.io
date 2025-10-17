@@ -17,7 +17,6 @@ export class Player extends Character {
     update(delta) {
         if (this.moving == false) {
             this.direction = this.input.movementVector;
-            this.moving = false;
             if (this.direction.x !== 0 || this.direction.y !== 0) {
                 const target = this.pathfinding.getNode({
                     x: this.cell.x + this.direction.x,
