@@ -63,29 +63,19 @@ export class Game {
     }
 
     update(delta) {
-        // module update timer
-        this.mut_time += delta;
-        if (this.mut_time >= this.mut_interval) {
-            this.mut_time -= this.mut_interval;
-            for (const module of this.modules) {
-                module.tick();
-            }
-        }
-
         // update entities
-        for (const character of this.npcs) {
-            character.update(delta); // animation, movement, etc.
+        for (const npc of this.npcs) {
+            npc.update(delta); // animation, movement, etc.
         }
         this.player.update(delta);
     }
 
     render() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);        
         this.tilemap.draw();
 
-        for (const character of this.npcs) {
-            character.draw();
+        for (const npcs of this.npcs) {
+            npcs.draw();
         }
         this.player.draw();
     }
