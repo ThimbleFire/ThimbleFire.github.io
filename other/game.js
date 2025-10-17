@@ -10,11 +10,9 @@ export class Game {
         this.ctx = this.canvas.getContext('2d');
         this.ctx.imageSmoothingEnabled = false;
         this.lastTimestamp = performance.now();
-        this.characters = [];
-        this.triggers = [];
+        this.npcs = [];
         
         this.pathfinding = new Pathfinding();
-        this.modules = [];
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
         this.input = new Input();
         this.player = new Player("Tony", {x:0, y:0}, this.ctx, this.input, this.pathfinding, (filename) => { this.load(filename); });
@@ -25,12 +23,12 @@ export class Game {
                 y: this.player.cell.y + this.player.lastDirection.y
             };
             // search for modules in that tile
-            for (const module of this.modules) {
-                if (module.cell.x == cellInFrontOfPlayer.x && module.cell.y == cellInFrontOfPlayer.y) {
-                    module.subscribe(this.player);
-                    return
-                }
-            }
+            // for (const module of this.modules) {
+            //     if (module.cell.x == cellInFrontOfPlayer.x && module.cell.y == cellInFrontOfPlayer.y) {
+            //         module.subscribe(this.player);
+            //         return
+            //     }
+            // }
         });
     
         // module update timer
@@ -39,35 +37,17 @@ export class Game {
     }
 
     async load(filename) {
-        console.log(`load called`);
-        const response = await fetch(filename + '.JSON');
-        const data = await response.json();
-
-        // clear existing characters
-        this.characters = [];
-        this.pathfinding.enabled = false;
-        for (const character of data.npcs) {
-            this.characters.push(new NPC(character.name, {x:character.x, y:character.y}, this.ctx, this.pathfinding));
-        }
-
-        this.triggers = data.transitionZones || [];
+        this.npcs = [];
 
         this.player.cell = { x: data.playerStart.x, y: data.playerStart.y };
         this.player.transform.SetPosition(this.player.cell.x * 16, this.player.cell.y * 16);
-        this.player.setTransitionZones(data.transitionZones);
 
         await Promise.all([
-            this.tilemap.load('./tilemap.png'),
-            this.tilemap.load_map(filename + '.tmx', this.modules),
+            this.tilemap.load_map(data.playerStart.x, data.playerStart.y),
             this.player.load('./character.png'),
-            ...this.characters.map(c => c.load('./character.png')),
+            ...this.npcs.map(c => c.load('./character.png')),
         ]);
         this.pathfinding.enabled = true;
-    }
-
-
-    tryInteract() {
-        console.log(`hello world`);
     }
 
     start() {
@@ -95,7 +75,7 @@ export class Game {
         }
 
         // update entities
-        for (const character of this.characters) {
+        for (const character of this.npcs) {
             character.update(delta); // animation, movement, etc.
         }
         this.player.update(delta);
@@ -106,7 +86,7 @@ export class Game {
         
         this.tilemap.draw();
 
-        for (const character of this.characters) {
+        for (const character of this.npcs) {
             character.draw();
         }
         this.player.draw();
