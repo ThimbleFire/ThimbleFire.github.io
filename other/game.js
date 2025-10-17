@@ -70,7 +70,7 @@ export class Game {
         }
         this.player.update(delta);
         
-        this.camera.follow(this.player.transform);
+        this.camera.follow(this.player);
     }
 
     render() {
