@@ -32,19 +32,28 @@ export class AnimatedSceneObject extends SceneObject {
     }
 
     draw() {
+        if (!this.visible || !this.image.complete) return;
+
         const frames = this.animations[this.currentAnimation];
         const frame = frames[this.frameIndex];
 
-        if (this.visible)
+        const pos = this.getWorldPosition();
+
         this.ctx.drawImage(
             this.image,
             frame.x,
             frame.y,
             this.renderRect.size.x,
             this.renderRect.size.y,
-            this.transform.position.x,
-            this.transform.position.y,
+            Math.floor(pos.x),
+            Math.floor(pos.y),
             this.transform.size.x,
-            this.transform.size.y);
+            this.transform.size.y
+        );
+
+        // Optionally draw children (if any)
+        for (const child of this.children) {
+            child.draw();
+        }
     }
 }
