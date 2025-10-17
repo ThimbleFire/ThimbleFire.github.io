@@ -17,17 +17,28 @@ export class Player extends Character {
     update(delta) {
         if (this.moving == false) {
             this.direction = this.input.movementVector;
-            if (this.direction.x !== 0 || this.direction.y !== 0) {
+            if (this.direction.x !== 0 || this.direction.y !== 0) 
+            {
                 const target = this.pathfinding.getNode({
                     x: this.cell.x + this.direction.x,
                     y: this.cell.y + this.direction.y
                 });
                 
-                if (target && target.walkable) {
+                console.log('attempting to move to:', {
+                    x: this.cell.x + this.direction.x,
+                    y: this.cell.y + this.direction.y
+                });
+                
+                console.log('target node:', target);
+                console.log('target walkable:', target?.walkable);
+
+                if (target && target.walkable)
+                {
                     const path = this.pathfinding.buildPath(this.cell, target.cell, 2);
                     console.log(`path returned length > 0: ${path.length > 0 ? 'true' : 'false'}`);
                     
-                    if (path.length > 0) {
+                    if (path.length > 0)
+                    {
                         this.moving = true;
                         this.chain = path.slice();
                     }
