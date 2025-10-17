@@ -17,17 +17,23 @@ export class Transform {
             x: target.x - this.position.x, 
             y: target.y - this.position.y
         };
-        //console.log(`${target.x}`);
+    
         const distance = Math.hypot(dir.x, dir.y);
-
+    
+        if (distance === 0) return 0; // Already at target
+    
         const step = (delta / 1000) * speed;
-        const moveX = (dir.x / distance) * step;
-        const moveY = (dir.y / distance) * step;
-
+    
+        // Prevent overshooting the target
+        const moveDist = Math.min(step, distance);
+        const moveX = (dir.x / distance) * moveDist;
+        const moveY = (dir.y / distance) * moveDist;
+    
         this.Translate(moveX, moveY);
-
-        return distance;
+    
+        return distance - moveDist;
     }
+
     ToString() {
         console.log(`transform: { position: (x: ${this.position.x} y: ${this.position.y}), size: (width: ${this.size.x} height: ${this.size.y}) }`);
     }
