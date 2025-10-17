@@ -22,18 +22,22 @@ export class Pathfinding {
         this.enabled = true;
     }
 
-    getNode(cell) {
-        if ( cell.x < 0 || cell.x >= this.width || cell.y < 0 || cell.y > this.height) return null;
-        return this.nodes[cell.y][cell.x];
+    getNode({ x, y }) {
+        if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
+            console.log('getNode returning null: out of bounds', { x, y });
+            return null;
+        }
+        return this.nodes[y][x];
     }
 
-    setTileUnoccupied(cell) {
-        let node = this.getNode(cell);
+
+    setTileUnoccupied({x:x, y:y}) {
+        let node = this.getNode({x:x, y:y});
         if (node) node.walkable = true;
     }
 
-    setTileOccupied(cell) {
-        let node = this.getNode(cell);
+    setTileOccupied({x, y}) {
+        let node = this.getNode({x:x, y:y});
         if (node) node.walkable = false;
     }
 
