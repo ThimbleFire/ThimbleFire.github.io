@@ -33,7 +33,7 @@ export class TileMap {
             8:  '#99DDFF', // ice
         };
 
-        this.ctx.fillStyle = colors[tileId] || '#444'; // fallback color
+        this.ctx.fillStyle = colors[tileId] || '#FF00FF'; // fallback color
         this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
     }
 }
