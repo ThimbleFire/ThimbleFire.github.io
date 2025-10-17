@@ -23,8 +23,7 @@ export class Pathfinding {
     }
 
     getNode(cell) {
-        if ( cell.x < 0 || cell.y < 0 )
-            return null;
+        if ( cell.x < 0 || cell.x >= this.width || cell.y < 0 || cell.y > this.height) return null;
         return this.nodes[cell.y][cell.x];
     }
 
