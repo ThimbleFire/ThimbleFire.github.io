@@ -3,6 +3,7 @@ import { TileMap } from './tilemap.js';
 import { Input } from './input-listener.js';
 import { Player } from './player.js';
 import { Pathfinding } from './pathfinding.js';
+import { Camera } from './camera.js';
 
 export class Game {
     constructor() {
@@ -11,7 +12,7 @@ export class Game {
         this.ctx.imageSmoothingEnabled = false;
         this.lastTimestamp = performance.now();
         this.npcs = [];
-        
+        this.camera = new Camera(this.canvas.width, this.canvas.height);        
         this.pathfinding = new Pathfinding();
         this.tilemap = new TileMap(this.ctx, this.pathfinding);
         this.input = new Input();
@@ -68,15 +69,24 @@ export class Game {
             npc.update(delta); // animation, movement, etc.
         }
         this.player.update(delta);
+        
+        this.camera.follow(this.player.transfor
     }
 
     render() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);        
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.save();
+        
+        this.camera.apply(this.ctx);
+        
         this.tilemap.draw();
 
         for (const npcs of this.npcs) {
             npcs.draw();
         }
         this.player.draw();
+
+        this.ctx.restore();
     }
 }
