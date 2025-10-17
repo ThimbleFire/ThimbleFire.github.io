@@ -50,10 +50,5 @@ export class AnimatedSceneObject extends SceneObject {
             this.transform.size.x,
             this.transform.size.y
         );
-
-        // Optionally draw children (if any)
-        for (const child of this.children) {
-            child.draw();
-        }
     }
 }
