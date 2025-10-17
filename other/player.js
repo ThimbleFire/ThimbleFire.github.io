@@ -53,15 +53,6 @@ export class Player extends Character {
         this.cell = this.chain[0].cell;
         this.transform.position = this.chain[0].position;
         this.chain.shift();
-
-        for (const trig of this.transitionZones) {
-            if (this.cell.x >= trig.x &&
-                this.cell.x < trig.x + trig.w &&
-                this.cell.y >= trig.y &&
-                this.cell.y < trig.y + trig.h) {
-                this.invokable(trig.targetMap);
-            }
-        }
     }
 
     _on_destination_reached() {
