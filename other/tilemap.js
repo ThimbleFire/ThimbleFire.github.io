@@ -5,7 +5,7 @@ export class TileMap {
     constructor(ctx, pathfinding) {
         this.ctx = ctx;
         this.pathfinding = pathfinding;
-        this.tileSize = 32;
+        this.tileSize = 16;
 
         this.columns = 32;
         this.rows = 32;
