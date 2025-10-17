@@ -31,7 +31,7 @@ export class Pathfinding {
     }
 
 
-    setTileUnoccupied({x:x, y:y}) {
+    setTileUnoccupied({x, y}) {
         let node = this.getNode({x:x, y:y});
         if (node) node.walkable = true;
     }
